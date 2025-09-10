@@ -1,0 +1,1022 @@
+{
+  "model": "LlamaForCausalLM",
+  "hardware": "NVIDIA H800",
+  "tp_size": 8,
+  "pp_size": 1,
+  "iterations": [
+    {
+      "iteration": 1,
+      "phase": "prefill",
+      "operator_durations": {
+        "gemm": {
+          "qkv_proj": {
+            "single_duration_ms": 0.0,
+            "count": 80,
+            "total_duration_ms": 0.0
+          },
+          "o_proj": {
+            "single_duration_ms": 0.0,
+            "count": 80,
+            "total_duration_ms": 0.0
+          },
+          "gate_up_proj": {
+            "single_duration_ms": 0.006024,
+            "count": 80,
+            "total_duration_ms": 0.481948
+          },
+          "down_proj": {
+            "single_duration_ms": 0.0,
+            "count": 80,
+            "total_duration_ms": 0.0
+          },
+          "lm_head": {
+            "single_duration_ms": 0.0,
+            "count": 1,
+            "total_duration_ms": 0.0
+          }
+        },
+        "attention": {
+          "single_duration_ms": 0.8306,
+          "count": 80,
+          "total_duration_ms": 66.44801
+        },
+        "rmsnorm": {
+          "single_duration_ms": 1.848425,
+          "count": 161,
+          "total_duration_ms": 297.596394
+        },
+        "siluandmul": {
+          "single_duration_ms": 0.593343,
+          "count": 80,
+          "total_duration_ms": 47.467456
+        },
+        "communication": {
+          "all_reduce": {
+            "single_duration_ms": 8.842042,
+            "count": 160,
+            "total_duration_ms": 1414.726689
+          }
+        }
+      },
+      "total_duration_ms": 1826.720497
+    },
+    {
+      "iteration": 2,
+      "phase": "decode",
+      "operator_durations": {
+        "gemm": {
+          "qkv_proj": {
+            "single_duration_ms": 0.0,
+            "count": 80,
+            "total_duration_ms": 0.0
+          },
+          "o_proj": {
+            "single_duration_ms": 0.0,
+            "count": 80,
+            "total_duration_ms": 0.0
+          },
+          "gate_up_proj": {
+            "single_duration_ms": 0.0,
+            "count": 80,
+            "total_duration_ms": 0.0
+          },
+          "down_proj": {
+            "single_duration_ms": 0.0,
+            "count": 80,
+            "total_duration_ms": 0.0
+          },
+          "lm_head": {
+            "single_duration_ms": 0.0,
+            "count": 1,
+            "total_duration_ms": 0.0
+          }
+        },
+        "attention": {
+          "single_duration_ms": 0.007571,
+          "count": 80,
+          "total_duration_ms": 0.605664
+        },
+        "rmsnorm": {
+          "single_duration_ms": 0.002793,
+          "count": 161,
+          "total_duration_ms": 0.449723
+        },
+        "siluandmul": {
+          "single_duration_ms": 0.000776,
+          "count": 80,
+          "total_duration_ms": 0.062046
+        },
+        "communication": {
+          "all_reduce": {
+            "single_duration_ms": 0.038301,
+            "count": 160,
+            "total_duration_ms": 6.128234
+          }
+        }
+      },
+      "total_duration_ms": 7.245667
+    },
+    {
+      "iteration": 3,
+      "phase": "decode",
+      "operator_durations": {
+        "gemm": {
+          "qkv_proj": {
+            "single_duration_ms": 0.0,
+            "count": 80,
+            "total_duration_ms": 0.0
+          },
+          "o_proj": {
+            "single_duration_ms": 0.0,
+            "count": 80,
+            "total_duration_ms": 0.0
+          },
+          "gate_up_proj": {
+            "single_duration_ms": 0.0,
+            "count": 80,
+            "total_duration_ms": 0.0
+          },
+          "down_proj": {
+            "single_duration_ms": 0.0,
+            "count": 80,
+            "total_duration_ms": 0.0
+          },
+          "lm_head": {
+            "single_duration_ms": 0.0,
+            "count": 1,
+            "total_duration_ms": 0.0
+          }
+        },
+        "attention": {
+          "single_duration_ms": 0.007571,
+          "count": 80,
+          "total_duration_ms": 0.605664
+        },
+        "rmsnorm": {
+          "single_duration_ms": 0.002793,
+          "count": 161,
+          "total_duration_ms": 0.449723
+        },
+        "siluandmul": {
+          "single_duration_ms": 0.000776,
+          "count": 80,
+          "total_duration_ms": 0.062046
+        },
+        "communication": {
+          "all_reduce": {
+            "single_duration_ms": 0.038301,
+            "count": 160,
+            "total_duration_ms": 6.128234
+          }
+        }
+      },
+      "total_duration_ms": 7.245667
+    },
+    {
+      "iteration": 4,
+      "phase": "decode",
+      "operator_durations": {
+        "gemm": {
+          "qkv_proj": {
+            "single_duration_ms": 0.0,
+            "count": 80,
+            "total_duration_ms": 0.0
+          },
+          "o_proj": {
+            "single_duration_ms": 0.0,
+            "count": 80,
+            "total_duration_ms": 0.0
+          },
+          "gate_up_proj": {
+            "single_duration_ms": 0.0,
+            "count": 80,
+            "total_duration_ms": 0.0
+          },
+          "down_proj": {
+            "single_duration_ms": 0.0,
+            "count": 80,
+            "total_duration_ms": 0.0
+          },
+          "lm_head": {
+            "single_duration_ms": 0.0,
+            "count": 1,
+            "total_duration_ms": 0.0
+          }
+        },
+        "attention": {
+          "single_duration_ms": 0.007571,
+          "count": 80,
+          "total_duration_ms": 0.605664
+        },
+        "rmsnorm": {
+          "single_duration_ms": 0.002793,
+          "count": 161,
+          "total_duration_ms": 0.449723
+        },
+        "siluandmul": {
+          "single_duration_ms": 0.000776,
+          "count": 80,
+          "total_duration_ms": 0.062046
+        },
+        "communication": {
+          "all_reduce": {
+            "single_duration_ms": 0.038301,
+            "count": 160,
+            "total_duration_ms": 6.128234
+          }
+        }
+      },
+      "total_duration_ms": 7.245667
+    },
+    {
+      "iteration": 5,
+      "phase": "decode",
+      "operator_durations": {
+        "gemm": {
+          "qkv_proj": {
+            "single_duration_ms": 0.0,
+            "count": 80,
+            "total_duration_ms": 0.0
+          },
+          "o_proj": {
+            "single_duration_ms": 0.0,
+            "count": 80,
+            "total_duration_ms": 0.0
+          },
+          "gate_up_proj": {
+            "single_duration_ms": 0.0,
+            "count": 80,
+            "total_duration_ms": 0.0
+          },
+          "down_proj": {
+            "single_duration_ms": 0.0,
+            "count": 80,
+            "total_duration_ms": 0.0
+          },
+          "lm_head": {
+            "single_duration_ms": 0.0,
+            "count": 1,
+            "total_duration_ms": 0.0
+          }
+        },
+        "attention": {
+          "single_duration_ms": 0.007571,
+          "count": 80,
+          "total_duration_ms": 0.605664
+        },
+        "rmsnorm": {
+          "single_duration_ms": 0.002793,
+          "count": 161,
+          "total_duration_ms": 0.449723
+        },
+        "siluandmul": {
+          "single_duration_ms": 0.000776,
+          "count": 80,
+          "total_duration_ms": 0.062046
+        },
+        "communication": {
+          "all_reduce": {
+            "single_duration_ms": 0.038301,
+            "count": 160,
+            "total_duration_ms": 6.128234
+          }
+        }
+      },
+      "total_duration_ms": 7.245667
+    },
+    {
+      "iteration": 6,
+      "phase": "decode",
+      "operator_durations": {
+        "gemm": {
+          "qkv_proj": {
+            "single_duration_ms": 0.0,
+            "count": 80,
+            "total_duration_ms": 0.0
+          },
+          "o_proj": {
+            "single_duration_ms": 0.0,
+            "count": 80,
+            "total_duration_ms": 0.0
+          },
+          "gate_up_proj": {
+            "single_duration_ms": 0.0,
+            "count": 80,
+            "total_duration_ms": 0.0
+          },
+          "down_proj": {
+            "single_duration_ms": 0.0,
+            "count": 80,
+            "total_duration_ms": 0.0
+          },
+          "lm_head": {
+            "single_duration_ms": 0.0,
+            "count": 1,
+            "total_duration_ms": 0.0
+          }
+        },
+        "attention": {
+          "single_duration_ms": 0.007571,
+          "count": 80,
+          "total_duration_ms": 0.605664
+        },
+        "rmsnorm": {
+          "single_duration_ms": 0.002793,
+          "count": 161,
+          "total_duration_ms": 0.449723
+        },
+        "siluandmul": {
+          "single_duration_ms": 0.000776,
+          "count": 80,
+          "total_duration_ms": 0.062046
+        },
+        "communication": {
+          "all_reduce": {
+            "single_duration_ms": 0.038301,
+            "count": 160,
+            "total_duration_ms": 6.128234
+          }
+        }
+      },
+      "total_duration_ms": 7.245667
+    },
+    {
+      "iteration": 7,
+      "phase": "decode",
+      "operator_durations": {
+        "gemm": {
+          "qkv_proj": {
+            "single_duration_ms": 0.0,
+            "count": 80,
+            "total_duration_ms": 0.0
+          },
+          "o_proj": {
+            "single_duration_ms": 0.0,
+            "count": 80,
+            "total_duration_ms": 0.0
+          },
+          "gate_up_proj": {
+            "single_duration_ms": 0.0,
+            "count": 80,
+            "total_duration_ms": 0.0
+          },
+          "down_proj": {
+            "single_duration_ms": 0.0,
+            "count": 80,
+            "total_duration_ms": 0.0
+          },
+          "lm_head": {
+            "single_duration_ms": 0.0,
+            "count": 1,
+            "total_duration_ms": 0.0
+          }
+        },
+        "attention": {
+          "single_duration_ms": 0.007571,
+          "count": 80,
+          "total_duration_ms": 0.605664
+        },
+        "rmsnorm": {
+          "single_duration_ms": 0.002793,
+          "count": 161,
+          "total_duration_ms": 0.449723
+        },
+        "siluandmul": {
+          "single_duration_ms": 0.000776,
+          "count": 80,
+          "total_duration_ms": 0.062046
+        },
+        "communication": {
+          "all_reduce": {
+            "single_duration_ms": 0.038301,
+            "count": 160,
+            "total_duration_ms": 6.128234
+          }
+        }
+      },
+      "total_duration_ms": 7.245667
+    },
+    {
+      "iteration": 8,
+      "phase": "decode",
+      "operator_durations": {
+        "gemm": {
+          "qkv_proj": {
+            "single_duration_ms": 0.0,
+            "count": 80,
+            "total_duration_ms": 0.0
+          },
+          "o_proj": {
+            "single_duration_ms": 0.0,
+            "count": 80,
+            "total_duration_ms": 0.0
+          },
+          "gate_up_proj": {
+            "single_duration_ms": 0.0,
+            "count": 80,
+            "total_duration_ms": 0.0
+          },
+          "down_proj": {
+            "single_duration_ms": 0.0,
+            "count": 80,
+            "total_duration_ms": 0.0
+          },
+          "lm_head": {
+            "single_duration_ms": 0.0,
+            "count": 1,
+            "total_duration_ms": 0.0
+          }
+        },
+        "attention": {
+          "single_duration_ms": 0.007571,
+          "count": 80,
+          "total_duration_ms": 0.605664
+        },
+        "rmsnorm": {
+          "single_duration_ms": 0.002793,
+          "count": 161,
+          "total_duration_ms": 0.449723
+        },
+        "siluandmul": {
+          "single_duration_ms": 0.000776,
+          "count": 80,
+          "total_duration_ms": 0.062046
+        },
+        "communication": {
+          "all_reduce": {
+            "single_duration_ms": 0.038301,
+            "count": 160,
+            "total_duration_ms": 6.128234
+          }
+        }
+      },
+      "total_duration_ms": 7.245667
+    },
+    {
+      "iteration": 9,
+      "phase": "decode",
+      "operator_durations": {
+        "gemm": {
+          "qkv_proj": {
+            "single_duration_ms": 0.0,
+            "count": 80,
+            "total_duration_ms": 0.0
+          },
+          "o_proj": {
+            "single_duration_ms": 0.0,
+            "count": 80,
+            "total_duration_ms": 0.0
+          },
+          "gate_up_proj": {
+            "single_duration_ms": 0.0,
+            "count": 80,
+            "total_duration_ms": 0.0
+          },
+          "down_proj": {
+            "single_duration_ms": 0.0,
+            "count": 80,
+            "total_duration_ms": 0.0
+          },
+          "lm_head": {
+            "single_duration_ms": 0.0,
+            "count": 1,
+            "total_duration_ms": 0.0
+          }
+        },
+        "attention": {
+          "single_duration_ms": 0.007571,
+          "count": 80,
+          "total_duration_ms": 0.605664
+        },
+        "rmsnorm": {
+          "single_duration_ms": 0.002793,
+          "count": 161,
+          "total_duration_ms": 0.449723
+        },
+        "siluandmul": {
+          "single_duration_ms": 0.000776,
+          "count": 80,
+          "total_duration_ms": 0.062046
+        },
+        "communication": {
+          "all_reduce": {
+            "single_duration_ms": 0.038301,
+            "count": 160,
+            "total_duration_ms": 6.128234
+          }
+        }
+      },
+      "total_duration_ms": 7.245667
+    },
+    {
+      "iteration": 10,
+      "phase": "decode",
+      "operator_durations": {
+        "gemm": {
+          "qkv_proj": {
+            "single_duration_ms": 0.0,
+            "count": 80,
+            "total_duration_ms": 0.0
+          },
+          "o_proj": {
+            "single_duration_ms": 0.0,
+            "count": 80,
+            "total_duration_ms": 0.0
+          },
+          "gate_up_proj": {
+            "single_duration_ms": 0.0,
+            "count": 80,
+            "total_duration_ms": 0.0
+          },
+          "down_proj": {
+            "single_duration_ms": 0.0,
+            "count": 80,
+            "total_duration_ms": 0.0
+          },
+          "lm_head": {
+            "single_duration_ms": 0.0,
+            "count": 1,
+            "total_duration_ms": 0.0
+          }
+        },
+        "attention": {
+          "single_duration_ms": 0.008272,
+          "count": 80,
+          "total_duration_ms": 0.661721
+        },
+        "rmsnorm": {
+          "single_duration_ms": 0.002793,
+          "count": 161,
+          "total_duration_ms": 0.449723
+        },
+        "siluandmul": {
+          "single_duration_ms": 0.000776,
+          "count": 80,
+          "total_duration_ms": 0.062046
+        },
+        "communication": {
+          "all_reduce": {
+            "single_duration_ms": 0.038301,
+            "count": 160,
+            "total_duration_ms": 6.128234
+          }
+        }
+      },
+      "total_duration_ms": 7.301724
+    },
+    {
+      "iteration": 11,
+      "phase": "decode",
+      "operator_durations": {
+        "gemm": {
+          "qkv_proj": {
+            "single_duration_ms": 0.0,
+            "count": 80,
+            "total_duration_ms": 0.0
+          },
+          "o_proj": {
+            "single_duration_ms": 0.0,
+            "count": 80,
+            "total_duration_ms": 0.0
+          },
+          "gate_up_proj": {
+            "single_duration_ms": 0.0,
+            "count": 80,
+            "total_duration_ms": 0.0
+          },
+          "down_proj": {
+            "single_duration_ms": 0.0,
+            "count": 80,
+            "total_duration_ms": 0.0
+          },
+          "lm_head": {
+            "single_duration_ms": 0.0,
+            "count": 1,
+            "total_duration_ms": 0.0
+          }
+        },
+        "attention": {
+          "single_duration_ms": 0.008272,
+          "count": 80,
+          "total_duration_ms": 0.661721
+        },
+        "rmsnorm": {
+          "single_duration_ms": 0.002793,
+          "count": 161,
+          "total_duration_ms": 0.449723
+        },
+        "siluandmul": {
+          "single_duration_ms": 0.000776,
+          "count": 80,
+          "total_duration_ms": 0.062046
+        },
+        "communication": {
+          "all_reduce": {
+            "single_duration_ms": 0.038301,
+            "count": 160,
+            "total_duration_ms": 6.128234
+          }
+        }
+      },
+      "total_duration_ms": 7.301724
+    },
+    {
+      "iteration": 12,
+      "phase": "decode",
+      "operator_durations": {
+        "gemm": {
+          "qkv_proj": {
+            "single_duration_ms": 0.0,
+            "count": 80,
+            "total_duration_ms": 0.0
+          },
+          "o_proj": {
+            "single_duration_ms": 0.0,
+            "count": 80,
+            "total_duration_ms": 0.0
+          },
+          "gate_up_proj": {
+            "single_duration_ms": 0.0,
+            "count": 80,
+            "total_duration_ms": 0.0
+          },
+          "down_proj": {
+            "single_duration_ms": 0.0,
+            "count": 80,
+            "total_duration_ms": 0.0
+          },
+          "lm_head": {
+            "single_duration_ms": 0.0,
+            "count": 1,
+            "total_duration_ms": 0.0
+          }
+        },
+        "attention": {
+          "single_duration_ms": 0.008272,
+          "count": 80,
+          "total_duration_ms": 0.661721
+        },
+        "rmsnorm": {
+          "single_duration_ms": 0.002793,
+          "count": 161,
+          "total_duration_ms": 0.449723
+        },
+        "siluandmul": {
+          "single_duration_ms": 0.000776,
+          "count": 80,
+          "total_duration_ms": 0.062046
+        },
+        "communication": {
+          "all_reduce": {
+            "single_duration_ms": 0.038301,
+            "count": 160,
+            "total_duration_ms": 6.128234
+          }
+        }
+      },
+      "total_duration_ms": 7.301724
+    },
+    {
+      "iteration": 13,
+      "phase": "decode",
+      "operator_durations": {
+        "gemm": {
+          "qkv_proj": {
+            "single_duration_ms": 0.0,
+            "count": 80,
+            "total_duration_ms": 0.0
+          },
+          "o_proj": {
+            "single_duration_ms": 0.0,
+            "count": 80,
+            "total_duration_ms": 0.0
+          },
+          "gate_up_proj": {
+            "single_duration_ms": 0.0,
+            "count": 80,
+            "total_duration_ms": 0.0
+          },
+          "down_proj": {
+            "single_duration_ms": 0.0,
+            "count": 80,
+            "total_duration_ms": 0.0
+          },
+          "lm_head": {
+            "single_duration_ms": 0.0,
+            "count": 1,
+            "total_duration_ms": 0.0
+          }
+        },
+        "attention": {
+          "single_duration_ms": 0.008272,
+          "count": 80,
+          "total_duration_ms": 0.661721
+        },
+        "rmsnorm": {
+          "single_duration_ms": 0.002793,
+          "count": 161,
+          "total_duration_ms": 0.449723
+        },
+        "siluandmul": {
+          "single_duration_ms": 0.000776,
+          "count": 80,
+          "total_duration_ms": 0.062046
+        },
+        "communication": {
+          "all_reduce": {
+            "single_duration_ms": 0.038301,
+            "count": 160,
+            "total_duration_ms": 6.128234
+          }
+        }
+      },
+      "total_duration_ms": 7.301724
+    },
+    {
+      "iteration": 14,
+      "phase": "decode",
+      "operator_durations": {
+        "gemm": {
+          "qkv_proj": {
+            "single_duration_ms": 0.0,
+            "count": 80,
+            "total_duration_ms": 0.0
+          },
+          "o_proj": {
+            "single_duration_ms": 0.0,
+            "count": 80,
+            "total_duration_ms": 0.0
+          },
+          "gate_up_proj": {
+            "single_duration_ms": 0.0,
+            "count": 80,
+            "total_duration_ms": 0.0
+          },
+          "down_proj": {
+            "single_duration_ms": 0.0,
+            "count": 80,
+            "total_duration_ms": 0.0
+          },
+          "lm_head": {
+            "single_duration_ms": 0.0,
+            "count": 1,
+            "total_duration_ms": 0.0
+          }
+        },
+        "attention": {
+          "single_duration_ms": 0.008272,
+          "count": 80,
+          "total_duration_ms": 0.661721
+        },
+        "rmsnorm": {
+          "single_duration_ms": 0.002793,
+          "count": 161,
+          "total_duration_ms": 0.449723
+        },
+        "siluandmul": {
+          "single_duration_ms": 0.000776,
+          "count": 80,
+          "total_duration_ms": 0.062046
+        },
+        "communication": {
+          "all_reduce": {
+            "single_duration_ms": 0.038301,
+            "count": 160,
+            "total_duration_ms": 6.128234
+          }
+        }
+      },
+      "total_duration_ms": 7.301724
+    },
+    {
+      "iteration": 15,
+      "phase": "decode",
+      "operator_durations": {
+        "gemm": {
+          "qkv_proj": {
+            "single_duration_ms": 0.0,
+            "count": 80,
+            "total_duration_ms": 0.0
+          },
+          "o_proj": {
+            "single_duration_ms": 0.0,
+            "count": 80,
+            "total_duration_ms": 0.0
+          },
+          "gate_up_proj": {
+            "single_duration_ms": 0.0,
+            "count": 80,
+            "total_duration_ms": 0.0
+          },
+          "down_proj": {
+            "single_duration_ms": 0.0,
+            "count": 80,
+            "total_duration_ms": 0.0
+          },
+          "lm_head": {
+            "single_duration_ms": 0.0,
+            "count": 1,
+            "total_duration_ms": 0.0
+          }
+        },
+        "attention": {
+          "single_duration_ms": 0.008272,
+          "count": 80,
+          "total_duration_ms": 0.661721
+        },
+        "rmsnorm": {
+          "single_duration_ms": 0.002793,
+          "count": 161,
+          "total_duration_ms": 0.449723
+        },
+        "siluandmul": {
+          "single_duration_ms": 0.000776,
+          "count": 80,
+          "total_duration_ms": 0.062046
+        },
+        "communication": {
+          "all_reduce": {
+            "single_duration_ms": 0.038301,
+            "count": 160,
+            "total_duration_ms": 6.128234
+          }
+        }
+      },
+      "total_duration_ms": 7.301724
+    },
+    {
+      "iteration": 16,
+      "phase": "decode",
+      "operator_durations": {
+        "gemm": {
+          "qkv_proj": {
+            "single_duration_ms": 0.0,
+            "count": 80,
+            "total_duration_ms": 0.0
+          },
+          "o_proj": {
+            "single_duration_ms": 0.0,
+            "count": 80,
+            "total_duration_ms": 0.0
+          },
+          "gate_up_proj": {
+            "single_duration_ms": 0.0,
+            "count": 80,
+            "total_duration_ms": 0.0
+          },
+          "down_proj": {
+            "single_duration_ms": 0.0,
+            "count": 80,
+            "total_duration_ms": 0.0
+          },
+          "lm_head": {
+            "single_duration_ms": 0.0,
+            "count": 1,
+            "total_duration_ms": 0.0
+          }
+        },
+        "attention": {
+          "single_duration_ms": 0.008272,
+          "count": 80,
+          "total_duration_ms": 0.661721
+        },
+        "rmsnorm": {
+          "single_duration_ms": 0.002793,
+          "count": 161,
+          "total_duration_ms": 0.449723
+        },
+        "siluandmul": {
+          "single_duration_ms": 0.000776,
+          "count": 80,
+          "total_duration_ms": 0.062046
+        },
+        "communication": {
+          "all_reduce": {
+            "single_duration_ms": 0.038301,
+            "count": 160,
+            "total_duration_ms": 6.128234
+          }
+        }
+      },
+      "total_duration_ms": 7.301724
+    },
+    {
+      "iteration": 17,
+      "phase": "decode",
+      "operator_durations": {
+        "gemm": {
+          "qkv_proj": {
+            "single_duration_ms": 0.0,
+            "count": 80,
+            "total_duration_ms": 0.0
+          },
+          "o_proj": {
+            "single_duration_ms": 0.0,
+            "count": 80,
+            "total_duration_ms": 0.0
+          },
+          "gate_up_proj": {
+            "single_duration_ms": 0.0,
+            "count": 80,
+            "total_duration_ms": 0.0
+          },
+          "down_proj": {
+            "single_duration_ms": 0.0,
+            "count": 80,
+            "total_duration_ms": 0.0
+          },
+          "lm_head": {
+            "single_duration_ms": 0.0,
+            "count": 1,
+            "total_duration_ms": 0.0
+          }
+        },
+        "attention": {
+          "single_duration_ms": 0.008272,
+          "count": 80,
+          "total_duration_ms": 0.661721
+        },
+        "rmsnorm": {
+          "single_duration_ms": 0.002793,
+          "count": 161,
+          "total_duration_ms": 0.449723
+        },
+        "siluandmul": {
+          "single_duration_ms": 0.000776,
+          "count": 80,
+          "total_duration_ms": 0.062046
+        },
+        "communication": {
+          "all_reduce": {
+            "single_duration_ms": 0.038301,
+            "count": 160,
+            "total_duration_ms": 6.128234
+          }
+        }
+      },
+      "total_duration_ms": 7.301724
+    },
+    {
+      "iteration": 18,
+      "phase": "decode",
+      "operator_durations": {
+        "gemm": {
+          "qkv_proj": {
+            "single_duration_ms": 0.0,
+            "count": 80,
+            "total_duration_ms": 0.0
+          },
+          "o_proj": {
+            "single_duration_ms": 0.0,
+            "count": 80,
+            "total_duration_ms": 0.0
+          },
+          "gate_up_proj": {
+            "single_duration_ms": 0.0,
+            "count": 80,
+            "total_duration_ms": 0.0
+          },
+          "down_proj": {
+            "single_duration_ms": 0.0,
+            "count": 80,
+            "total_duration_ms": 0.0
+          },
+          "lm_head": {
+            "single_duration_ms": 0.0,
+            "count": 1,
+            "total_duration_ms": 0.0
+          }
+        },
+        "attention": {
+          "single_duration_ms": 0.008272,
+          "count": 80,
+          "total_duration_ms": 0.661721
+        },
+        "rmsnorm": {
+          "single_duration_ms": 0.002793,
+          "count": 161,
+          "total_duration_ms": 0.449723
+        },
+        "siluandmul": {
+          "single_duration_ms": 0.000776,
+          "count": 80,
+          "total_duration_ms": 0.062046
+        },
+        "communication": {
+          "all_reduce": {
+            "single_duration_ms": 0.038301,
+            "count": 160,
+            "total_duration_ms": 6.128234
+          }
+        }
+      },
+      "total_duration_ms": 7.301724
+    }
+  ],
+  "summary": {
+    "prefill_duration_ms": 1826.720497,
+    "decode_avg_duration_ms": 7.275344,
+    "decode_total_duration_ms": 123.68085,
+    "total_duration_ms": 1950.401348
+  }
+}

@@ -1,0 +1,239 @@
+{
+  "timestamp": "2025-11-12T01:22:48.161477",
+  "model_info": {
+    "model_type": "ATTN_MLP",
+    "operator_type": "attn",
+    "features": [
+      "global_in_flight",
+      "global_cycle",
+      "local_cycle",
+      "sm_max_in_flight",
+      "sm_max_global_cycle",
+      "sm_max_shared_cycle",
+      "sm_max_local_cycle"
+    ],
+    "target": "overall_perf",
+    "num_features": 7,
+    "model_parameters": {
+      "input_dim": 7,
+      "hidden_dims": [
+        256,
+        128,
+        64
+      ],
+      "dropout_rate": 0.1,
+      "total_parameters": 44161
+    },
+    "batch_norm_position": "post_activation"
+  },
+  "data_info": {
+    "train_samples": 71969,
+    "test_samples": 32989,
+    "train_path": "./dataset/attn_train.csv",
+    "test_path": "./dataset/attn_test.csv",
+    "train_hardware_distribution": {
+      "NVIDIA A100-SXM4-80GB": 11995,
+      "NVIDIA A40": 11995,
+      "NVIDIA H20": 11995,
+      "NVIDIA L20": 11995,
+      "NVIDIA RTX 6000 Ada Generation": 11995,
+      "NVIDIA H800": 11994
+    },
+    "test_hardware_distribution": {
+      "NVIDIA A100-SXM4-80GB": 2999,
+      "NVIDIA A40": 2999,
+      "NVIDIA H100": 2999,
+      "NVIDIA H20": 2999,
+      "NVIDIA H200": 2999,
+      "NVIDIA H800": 2999,
+      "NVIDIA L20": 2999,
+      "NVIDIA L40": 2999,
+      "NVIDIA RTX 6000 Ada Generation": 2999,
+      "NVIDIA RTX A6000": 2999,
+      "NVIDIA RTX PRO 6000 Blackwell Server Edition": 2999
+    }
+  },
+  "feature_ranges": {
+    "global_in_flight": {
+      "min": 18.0,
+      "max": 48922624.0,
+      "mean": 536930.8941627645,
+      "std": 1940497.084741531
+    },
+    "global_cycle": {
+      "min": 15.82722205900203,
+      "max": 133181664.0327724,
+      "mean": 817287.3238087024,
+      "std": 3550789.7781064026
+    },
+    "local_cycle": {
+      "min": 6.797530023199148,
+      "max": 32700083.791473765,
+      "mean": 218723.89334088573,
+      "std": 863817.9032876117
+    },
+    "sm_max_in_flight": {
+      "min": 18.0,
+      "max": 628032.0,
+      "mean": 6253.676972029624,
+      "std": 20321.643895324425
+    },
+    "sm_max_global_cycle": {
+      "min": 1218.2083326516693,
+      "max": 134149713.92203169,
+      "mean": 976856.4266701567,
+      "std": 3749123.057369644
+    },
+    "sm_max_shared_cycle": {
+      "min": 144.0,
+      "max": 5024256.0,
+      "mean": 50029.415776236994,
+      "std": 162573.1511625954
+    },
+    "sm_max_local_cycle": {
+      "min": 555.937491691187,
+      "max": 32930688.92867477,
+      "mean": 259801.2709471443,
+      "std": 905323.6012104683
+    }
+  },
+  "preprocessing": {
+    "transformation": "log1p only (no standardization)",
+    "note": "This model does not use StandardScaler"
+  },
+  "evaluation_results": {
+    "overall": {
+      "mae": 0.07702987641096115,
+      "rmse": 0.13753379655685039,
+      "r2": 0.709601640701294,
+      "mean_relative_error": 0.28698021173477173,
+      "median_relative_error": 0.17885494232177734,
+      "accuracy_10_percent": 35.50577465215678,
+      "accuracy_20_percent": 53.45721301039741,
+      "accuracy_50_percent": 77.67437630725394
+    },
+    "by_hardware": {
+      "NVIDIA A100-SXM4-80GB": {
+        "test_samples": 2999,
+        "mae": 0.06057461351156235,
+        "rmse": 0.10368758439755583,
+        "r2": 0.7655511498451233,
+        "mean_relative_error": 0.2543002665042877,
+        "median_relative_error": 0.14413495361804962,
+        "accuracy_10_percent": 39.67989329776592,
+        "accuracy_20_percent": 61.08702900966989,
+        "accuracy_50_percent": 81.96065355118373
+      },
+      "NVIDIA A40": {
+        "test_samples": 2999,
+        "mae": 0.0855112075805664,
+        "rmse": 0.15776524756969101,
+        "r2": 0.6658332943916321,
+        "mean_relative_error": 0.2874220907688141,
+        "median_relative_error": 0.08629436790943146,
+        "accuracy_10_percent": 52.71757252417473,
+        "accuracy_20_percent": 63.08769589863288,
+        "accuracy_50_percent": 74.99166388796266
+      },
+      "NVIDIA H100": {
+        "test_samples": 2999,
+        "mae": 0.026779882609844208,
+        "rmse": 0.05257731245399303,
+        "r2": 0.9329737424850464,
+        "mean_relative_error": 0.1838056892156601,
+        "median_relative_error": 0.11601168662309647,
+        "accuracy_10_percent": 43.98132710903634,
+        "accuracy_20_percent": 70.45681893964655,
+        "accuracy_50_percent": 91.86395465155051
+      },
+      "NVIDIA H20": {
+        "test_samples": 2999,
+        "mae": 0.034852076321840286,
+        "rmse": 0.07325004853342193,
+        "r2": 0.9428399205207825,
+        "mean_relative_error": 0.13619595766067505,
+        "median_relative_error": 0.0481218546628952,
+        "accuracy_10_percent": 66.65555185061687,
+        "accuracy_20_percent": 80.02667555851951,
+        "accuracy_50_percent": 93.63121040346782
+      },
+      "NVIDIA H200": {
+        "test_samples": 2999,
+        "mae": 0.03791011869907379,
+        "rmse": 0.06878725405302831,
+        "r2": 0.8933500051498413,
+        "mean_relative_error": 0.21288840472698212,
+        "median_relative_error": 0.17375412583351135,
+        "accuracy_10_percent": 32.67755918639546,
+        "accuracy_20_percent": 58.31943981327109,
+        "accuracy_50_percent": 91.19706568856284
+      },
+      "NVIDIA H800": {
+        "test_samples": 2999,
+        "mae": 0.035259682685136795,
+        "rmse": 0.0652837228290697,
+        "r2": 0.9047728180885315,
+        "mean_relative_error": 0.19606409966945648,
+        "median_relative_error": 0.15414083003997803,
+        "accuracy_10_percent": 34.71157052350783,
+        "accuracy_20_percent": 64.75491830610204,
+        "accuracy_50_percent": 92.26408802934311
+      },
+      "NVIDIA L20": {
+        "test_samples": 2999,
+        "mae": 0.07523792237043381,
+        "rmse": 0.13283418029653143,
+        "r2": 0.7613415718078613,
+        "mean_relative_error": 0.193458691239357,
+        "median_relative_error": 0.084041066467762,
+        "accuracy_10_percent": 54.3514504834945,
+        "accuracy_20_percent": 68.85628542847616,
+        "accuracy_50_percent": 88.69623207735911
+      },
+      "NVIDIA L40": {
+        "test_samples": 2999,
+        "mae": 0.17103703320026398,
+        "rmse": 0.230624073835648,
+        "r2": 0.18678289651870728,
+        "mean_relative_error": 0.4572402238845825,
+        "median_relative_error": 0.4361986815929413,
+        "accuracy_10_percent": 2.1673891297099033,
+        "accuracy_20_percent": 8.436145381793931,
+        "accuracy_50_percent": 66.45548516172057
+      },
+      "NVIDIA RTX 6000 Ada Generation": {
+        "test_samples": 2999,
+        "mae": 0.07467847317457199,
+        "rmse": 0.1355662131462706,
+        "r2": 0.5107378363609314,
+        "mean_relative_error": 0.2683592736721039,
+        "median_relative_error": 0.15396781265735626,
+        "accuracy_10_percent": 35.445148382794265,
+        "accuracy_20_percent": 58.052684228076025,
+        "accuracy_50_percent": 80.92697565855285
+      },
+      "NVIDIA RTX A6000": {
+        "test_samples": 2999,
+        "mae": 0.10284490883350372,
+        "rmse": 0.1725501109673633,
+        "r2": 0.5724332332611084,
+        "mean_relative_error": 0.38589784502983093,
+        "median_relative_error": 0.24537090957164764,
+        "accuracy_10_percent": 24.74158052684228,
+        "accuracy_20_percent": 44.88162720906969,
+        "accuracy_50_percent": 62.38746248749584
+      },
+      "NVIDIA RTX PRO 6000 Blackwell Server Edition": {
+        "test_samples": 2999,
+        "mae": 0.14264270663261414,
+        "rmse": 0.19058407125245375,
+        "r2": 0.36765146255493164,
+        "mean_relative_error": 0.5811500549316406,
+        "median_relative_error": 0.6392232775688171,
+        "accuracy_10_percent": 3.434478159386462,
+        "accuracy_20_percent": 10.070023341113703,
+        "accuracy_50_percent": 30.0433477825942
+      }
+    }
+  }
+}

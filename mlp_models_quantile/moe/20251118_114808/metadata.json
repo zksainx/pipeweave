@@ -1,0 +1,134 @@
+{
+  "timestamp": "2025-11-18T11:48:54.166775",
+  "model_info": {
+    "model_type": "MOE_MLP_QUANTILE",
+    "operator_type": "moe",
+    "features": [
+      "tensor_all_ops",
+      "tensor_all_cycle",
+      "tensor_sm_max_ops",
+      "tensor_sm_max_cycle",
+      "global_in_flight",
+      "global_cycle",
+      "local_cycle",
+      "sm_max_in_flight",
+      "sm_max_global_cycle",
+      "sm_max_shared_cycle",
+      "sm_max_local_cycle"
+    ],
+    "target": "overall_perf",
+    "num_features": 11,
+    "loss_function": "Quantile Loss (q=0.8)",
+    "quantile": 0.8,
+    "purpose": "Upper bound prediction (80th percentile)",
+    "model_parameters": {
+      "input_dim": 11,
+      "hidden_dims": [
+        256,
+        128,
+        64
+      ],
+      "dropout_rate": 0.1,
+      "total_parameters": 45185
+    },
+    "batch_norm_position": "post_activation"
+  },
+  "data_info": {
+    "train_samples": 33264,
+    "train_path": "./dataset/moe_train.csv",
+    "validation": "No validation split - trained on full dataset",
+    "train_hardware_distribution": {
+      "NVIDIA A100-SXM4-80GB": 3024,
+      "NVIDIA A40": 3024,
+      "NVIDIA H100": 3024,
+      "NVIDIA H20": 3024,
+      "NVIDIA H200": 3024,
+      "NVIDIA H800": 3024,
+      "NVIDIA L20": 3024,
+      "NVIDIA L40": 3024,
+      "NVIDIA RTX 6000 Ada Generation": 3024,
+      "NVIDIA RTX A6000": 3024,
+      "NVIDIA RTX PRO 6000 Blackwell Server Edition": 3024
+    }
+  },
+  "feature_ranges": {
+    "tensor_all_ops": {
+      "min": 134217728.0,
+      "max": 3298534883328.0,
+      "mean": 221302286585.2275,
+      "std": 424056009878.73083
+    },
+    "tensor_all_cycle": {
+      "min": 248.24242424242425,
+      "max": 69483798.51971689,
+      "mean": 1870424.2013833318,
+      "std": 4574424.051550237
+    },
+    "tensor_sm_max_ops": {
+      "min": 1048576.0,
+      "max": 42412802048.0,
+      "mean": 2005762268.6599326,
+      "std": 3990275086.9800353
+    },
+    "tensor_sm_max_cycle": {
+      "min": 1024.0,
+      "max": 69579926.82170543,
+      "mean": 1883612.5423448214,
+      "std": 4585550.770939634
+    },
+    "global_in_flight": {
+      "min": 9216.0,
+      "max": 75497472.0,
+      "mean": 5190239.322751323,
+      "std": 8782473.744281959
+    },
+    "global_cycle": {
+      "min": 3271.2966776496432,
+      "max": 209976669.25897124,
+      "mean": 8513599.52892755,
+      "std": 18676307.14885574
+    },
+    "local_cycle": {
+      "min": 1546.090971354417,
+      "max": 51555555.55555556,
+      "mean": 2108863.15925292,
+      "std": 4247859.276922431
+    },
+    "sm_max_in_flight": {
+      "min": 128.0,
+      "max": 900096.0,
+      "mean": 47122.982683982686,
+      "std": 83136.91281888288
+    },
+    "sm_max_global_cycle": {
+      "min": 9745.666661213354,
+      "max": 210267164.3254916,
+      "mean": 8579682.725835087,
+      "std": 18719054.9498824
+    },
+    "sm_max_shared_cycle": {
+      "min": 1024.0,
+      "max": 7200768.0,
+      "mean": 376983.8614718615,
+      "std": 665095.302551063
+    },
+    "sm_max_local_cycle": {
+      "min": 4447.499933529496,
+      "max": 51631076.388888896,
+      "mean": 2125538.688220439,
+      "std": 4255023.677436257
+    }
+  },
+  "preprocessing": {
+    "transformation": "log1p only (no standardization)",
+    "note": "This model does not use StandardScaler"
+  },
+  "kernel_reports": {
+    "report_directory": "./mlp_models_quantile/moe/20251118_114808/kernel_reports",
+    "description": "Kernel performance analysis reports identifying underperforming kernels (actual < predicted)",
+    "threshold": 0.0,
+    "topk_per_hardware": "all",
+    "note": "Kernels with perf_diff < 0.0 are identified as underperforming",
+    "files": "See kernel_reports/ directory for CSV files"
+  }
+}

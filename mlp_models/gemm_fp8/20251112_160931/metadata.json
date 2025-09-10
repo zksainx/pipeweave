@@ -1,0 +1,179 @@
+{
+  "timestamp": "2025-11-12T16:10:33.984290",
+  "model_info": {
+    "model_type": "GEMM_FP8_MLP",
+    "operator_type": "gemm_fp8",
+    "features": [
+      "tensor_all_ops",
+      "tensor_all_cycle",
+      "tensor_sm_max_ops",
+      "tensor_sm_max_cycle",
+      "global_in_flight",
+      "global_cycle",
+      "local_cycle",
+      "sm_max_in_flight",
+      "sm_max_global_cycle",
+      "sm_max_shared_cycle",
+      "sm_max_local_cycle"
+    ],
+    "target": "overall_perf",
+    "num_features": 11,
+    "model_parameters": {
+      "input_dim": 11,
+      "hidden_dims": [
+        256,
+        128,
+        64
+      ],
+      "dropout_rate": 0.1,
+      "total_parameters": 45185
+    },
+    "batch_norm_position": "post_activation"
+  },
+  "data_info": {
+    "train_samples": 16818,
+    "test_samples": 8410,
+    "train_path": "./dataset/gemm_fp8_train.csv",
+    "test_path": "./dataset/gemm_fp8_test.csv",
+    "train_hardware_distribution": {
+      "NVIDIA H20": 8409,
+      "NVIDIA H800": 8409
+    },
+    "test_hardware_distribution": {
+      "NVIDIA H20": 2103,
+      "NVIDIA H800": 2103,
+      "NVIDIA H100": 2102,
+      "NVIDIA H200": 2102
+    }
+  },
+  "feature_ranges": {
+    "tensor_all_ops": {
+      "min": 67108864.0,
+      "max": 17592186044416.0,
+      "mean": 235497398146.32892,
+      "std": 925790570212.772
+    },
+    "tensor_all_cycle": {
+      "min": 62.06060606060606,
+      "max": 110127366.56410256,
+      "mean": 845999.8075322228,
+      "std": 4189851.1390179778
+    },
+    "tensor_sm_max_ops": {
+      "min": 8388608.0,
+      "max": 225754218496.0,
+      "mean": 2472013742.6547747,
+      "std": 9775644417.591578
+    },
+    "tensor_sm_max_cycle": {
+      "min": 1024.0,
+      "max": 110231552.0,
+      "mean": 866861.3609228207,
+      "std": 4194677.112470098
+    },
+    "global_in_flight": {
+      "min": 288.0,
+      "max": 1609728.0,
+      "mean": 43343.07717921275,
+      "std": 102519.4682072545
+    },
+    "global_cycle": {
+      "min": 124.94444437453016,
+      "max": 838027.3773088488,
+      "mean": 20684.112379177175,
+      "std": 49161.89690929058
+    },
+    "local_cycle": {
+      "min": 56.98690609056123,
+      "max": 318699.4824163358,
+      "mean": 8578.779083127592,
+      "std": 20291.40449585422
+    },
+    "sm_max_in_flight": {
+      "min": 64.0,
+      "max": 1722368.0,
+      "mean": 18859.968129385183,
+      "std": 74582.24805901777
+    },
+    "sm_max_global_cycle": {
+      "min": 2165.703702491856,
+      "max": 69946498.80530499,
+      "mean": 885402.0234665426,
+      "std": 3388787.0745809614
+    },
+    "sm_max_shared_cycle": {
+      "min": 512.0,
+      "max": 13778944.0,
+      "mean": 150879.74503508146,
+      "std": 596657.9844721422
+    },
+    "sm_max_local_cycle": {
+      "min": 988.33331856211,
+      "max": 26598026.269143507,
+      "mean": 366911.98688756255,
+      "std": 1399225.2441814714
+    }
+  },
+  "preprocessing": {
+    "transformation": "log1p only (no standardization)",
+    "note": "This model does not use StandardScaler"
+  },
+  "evaluation_results": {
+    "overall": {
+      "mae": 0.014458712190389633,
+      "rmse": 0.030137685420626562,
+      "r2": 0.9864862561225891,
+      "mean_relative_error": 0.038897208869457245,
+      "median_relative_error": 0.020416121929883957,
+      "accuracy_10_percent": 92.67538644470868,
+      "accuracy_20_percent": 98.15695600475624,
+      "accuracy_50_percent": 99.56004756242568
+    },
+    "by_hardware": {
+      "NVIDIA H100": {
+        "test_samples": 2102,
+        "mae": 0.014689532108604908,
+        "rmse": 0.029507046076512236,
+        "r2": 0.9797976613044739,
+        "mean_relative_error": 0.042428117245435715,
+        "median_relative_error": 0.02247265726327896,
+        "accuracy_10_percent": 91.05613701236918,
+        "accuracy_20_percent": 98.09705042816366,
+        "accuracy_50_percent": 99.476688867745
+      },
+      "NVIDIA H20": {
+        "test_samples": 2103,
+        "mae": 0.011768526397645473,
+        "rmse": 0.028071762858300795,
+        "r2": 0.9912189841270447,
+        "mean_relative_error": 0.019363073632121086,
+        "median_relative_error": 0.011011886410415173,
+        "accuracy_10_percent": 97.71754636233952,
+        "accuracy_20_percent": 98.90632429862102,
+        "accuracy_50_percent": 99.90489776509747
+      },
+      "NVIDIA H200": {
+        "test_samples": 2102,
+        "mae": 0.016818270087242126,
+        "rmse": 0.03324041481480139,
+        "r2": 0.9751773476600647,
+        "mean_relative_error": 0.0523303784430027,
+        "median_relative_error": 0.03678068518638611,
+        "accuracy_10_percent": 90.39010466222646,
+        "accuracy_20_percent": 97.52616555661275,
+        "accuracy_50_percent": 99.38154138915318
+      },
+      "NVIDIA H800": {
+        "test_samples": 2103,
+        "mae": 0.014559750445187092,
+        "rmse": 0.02948866394448784,
+        "r2": 0.9800977110862732,
+        "mean_relative_error": 0.041475340723991394,
+        "median_relative_error": 0.022054314613342285,
+        "accuracy_10_percent": 91.5359010936757,
+        "accuracy_20_percent": 98.0979553019496,
+        "accuracy_50_percent": 99.47693770803613
+      }
+    }
+  }
+}

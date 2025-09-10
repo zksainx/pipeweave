@@ -1,0 +1,3904 @@
+{
+  "model": "Qwen2ForCausalLM",
+  "model_params": {
+    "hidden_size": 5120,
+    "num_attention_heads": 40,
+    "num_key_value_heads": 8,
+    "head_dim": 128,
+    "intermediate_size": 13824,
+    "vocab_size": 152064,
+    "num_hidden_layers": 48
+  },
+  "tp_size": 1,
+  "pp_size": 1,
+  "iterations": [
+    {
+      "iteration": 1,
+      "phase": "prefill",
+      "batch_size": 1,
+      "q_lengths": [
+        32720
+      ],
+      "kv_lengths": [
+        32720
+      ],
+      "num_tokens": 32720,
+      "operators": {
+        "gemm": [
+          {
+            "name": "qkv_proj",
+            "type": "ColumnParallelLinear",
+            "M": 32720,
+            "N": 7168,
+            "K": 5120,
+            "count": 48
+          },
+          {
+            "name": "o_proj",
+            "type": "RowParallelLinear",
+            "M": 32720,
+            "N": 5120,
+            "K": 5120,
+            "count": 48
+          },
+          {
+            "name": "gate_up_proj",
+            "type": "MergedColumnParallelLinear",
+            "M": 32720,
+            "N": 27648,
+            "K": 5120,
+            "count": 48
+          },
+          {
+            "name": "down_proj",
+            "type": "RowParallelLinear",
+            "M": 32720,
+            "N": 5120,
+            "K": 13824,
+            "count": 48
+          },
+          {
+            "name": "lm_head",
+            "type": "Linear",
+            "M": 1,
+            "N": 152064,
+            "K": 5120,
+            "count": 1
+          }
+        ],
+        "attention": {
+          "attention_type": "fa3_ragged",
+          "bs": 1,
+          "q_lengths": [
+            32720
+          ],
+          "kv_lengths": [
+            32720
+          ],
+          "nh": 40,
+          "nkv": 8,
+          "hd": 128,
+          "count": 48
+        },
+        "rmsnorm": {
+          "seq": 32720,
+          "dim": 5120,
+          "count": 97
+        },
+        "siluandmul": {
+          "seq": 32720,
+          "dim": 27648,
+          "count": 48
+        },
+        "communication": []
+      }
+    },
+    {
+      "iteration": 2,
+      "phase": "decode",
+      "batch_size": 1,
+      "q_lengths": [
+        1
+      ],
+      "kv_lengths": [
+        32721
+      ],
+      "num_tokens": 1,
+      "operators": {
+        "gemm": [
+          {
+            "name": "qkv_proj",
+            "type": "ColumnParallelLinear",
+            "M": 1,
+            "N": 7168,
+            "K": 5120,
+            "count": 48
+          },
+          {
+            "name": "o_proj",
+            "type": "RowParallelLinear",
+            "M": 1,
+            "N": 5120,
+            "K": 5120,
+            "count": 48
+          },
+          {
+            "name": "gate_up_proj",
+            "type": "MergedColumnParallelLinear",
+            "M": 1,
+            "N": 27648,
+            "K": 5120,
+            "count": 48
+          },
+          {
+            "name": "down_proj",
+            "type": "RowParallelLinear",
+            "M": 1,
+            "N": 5120,
+            "K": 13824,
+            "count": 48
+          },
+          {
+            "name": "lm_head",
+            "type": "Linear",
+            "M": 1,
+            "N": 152064,
+            "K": 5120,
+            "count": 1
+          }
+        ],
+        "attention": {
+          "attention_type": "fa2_paged",
+          "bs": 1,
+          "q_lengths": [
+            1
+          ],
+          "kv_lengths": [
+            32721
+          ],
+          "nh": 40,
+          "nkv": 8,
+          "hd": 128,
+          "count": 48
+        },
+        "rmsnorm": {
+          "seq": 1,
+          "dim": 5120,
+          "count": 97
+        },
+        "siluandmul": {
+          "seq": 1,
+          "dim": 27648,
+          "count": 48
+        },
+        "communication": []
+      }
+    },
+    {
+      "iteration": 3,
+      "phase": "decode",
+      "batch_size": 1,
+      "q_lengths": [
+        1
+      ],
+      "kv_lengths": [
+        32722
+      ],
+      "num_tokens": 1,
+      "operators": {
+        "gemm": [
+          {
+            "name": "qkv_proj",
+            "type": "ColumnParallelLinear",
+            "M": 1,
+            "N": 7168,
+            "K": 5120,
+            "count": 48
+          },
+          {
+            "name": "o_proj",
+            "type": "RowParallelLinear",
+            "M": 1,
+            "N": 5120,
+            "K": 5120,
+            "count": 48
+          },
+          {
+            "name": "gate_up_proj",
+            "type": "MergedColumnParallelLinear",
+            "M": 1,
+            "N": 27648,
+            "K": 5120,
+            "count": 48
+          },
+          {
+            "name": "down_proj",
+            "type": "RowParallelLinear",
+            "M": 1,
+            "N": 5120,
+            "K": 13824,
+            "count": 48
+          },
+          {
+            "name": "lm_head",
+            "type": "Linear",
+            "M": 1,
+            "N": 152064,
+            "K": 5120,
+            "count": 1
+          }
+        ],
+        "attention": {
+          "attention_type": "fa2_paged",
+          "bs": 1,
+          "q_lengths": [
+            1
+          ],
+          "kv_lengths": [
+            32722
+          ],
+          "nh": 40,
+          "nkv": 8,
+          "hd": 128,
+          "count": 48
+        },
+        "rmsnorm": {
+          "seq": 1,
+          "dim": 5120,
+          "count": 97
+        },
+        "siluandmul": {
+          "seq": 1,
+          "dim": 27648,
+          "count": 48
+        },
+        "communication": []
+      }
+    },
+    {
+      "iteration": 4,
+      "phase": "decode",
+      "batch_size": 1,
+      "q_lengths": [
+        1
+      ],
+      "kv_lengths": [
+        32723
+      ],
+      "num_tokens": 1,
+      "operators": {
+        "gemm": [
+          {
+            "name": "qkv_proj",
+            "type": "ColumnParallelLinear",
+            "M": 1,
+            "N": 7168,
+            "K": 5120,
+            "count": 48
+          },
+          {
+            "name": "o_proj",
+            "type": "RowParallelLinear",
+            "M": 1,
+            "N": 5120,
+            "K": 5120,
+            "count": 48
+          },
+          {
+            "name": "gate_up_proj",
+            "type": "MergedColumnParallelLinear",
+            "M": 1,
+            "N": 27648,
+            "K": 5120,
+            "count": 48
+          },
+          {
+            "name": "down_proj",
+            "type": "RowParallelLinear",
+            "M": 1,
+            "N": 5120,
+            "K": 13824,
+            "count": 48
+          },
+          {
+            "name": "lm_head",
+            "type": "Linear",
+            "M": 1,
+            "N": 152064,
+            "K": 5120,
+            "count": 1
+          }
+        ],
+        "attention": {
+          "attention_type": "fa2_paged",
+          "bs": 1,
+          "q_lengths": [
+            1
+          ],
+          "kv_lengths": [
+            32723
+          ],
+          "nh": 40,
+          "nkv": 8,
+          "hd": 128,
+          "count": 48
+        },
+        "rmsnorm": {
+          "seq": 1,
+          "dim": 5120,
+          "count": 97
+        },
+        "siluandmul": {
+          "seq": 1,
+          "dim": 27648,
+          "count": 48
+        },
+        "communication": []
+      }
+    },
+    {
+      "iteration": 5,
+      "phase": "decode",
+      "batch_size": 1,
+      "q_lengths": [
+        1
+      ],
+      "kv_lengths": [
+        32724
+      ],
+      "num_tokens": 1,
+      "operators": {
+        "gemm": [
+          {
+            "name": "qkv_proj",
+            "type": "ColumnParallelLinear",
+            "M": 1,
+            "N": 7168,
+            "K": 5120,
+            "count": 48
+          },
+          {
+            "name": "o_proj",
+            "type": "RowParallelLinear",
+            "M": 1,
+            "N": 5120,
+            "K": 5120,
+            "count": 48
+          },
+          {
+            "name": "gate_up_proj",
+            "type": "MergedColumnParallelLinear",
+            "M": 1,
+            "N": 27648,
+            "K": 5120,
+            "count": 48
+          },
+          {
+            "name": "down_proj",
+            "type": "RowParallelLinear",
+            "M": 1,
+            "N": 5120,
+            "K": 13824,
+            "count": 48
+          },
+          {
+            "name": "lm_head",
+            "type": "Linear",
+            "M": 1,
+            "N": 152064,
+            "K": 5120,
+            "count": 1
+          }
+        ],
+        "attention": {
+          "attention_type": "fa2_paged",
+          "bs": 1,
+          "q_lengths": [
+            1
+          ],
+          "kv_lengths": [
+            32724
+          ],
+          "nh": 40,
+          "nkv": 8,
+          "hd": 128,
+          "count": 48
+        },
+        "rmsnorm": {
+          "seq": 1,
+          "dim": 5120,
+          "count": 97
+        },
+        "siluandmul": {
+          "seq": 1,
+          "dim": 27648,
+          "count": 48
+        },
+        "communication": []
+      }
+    },
+    {
+      "iteration": 6,
+      "phase": "decode",
+      "batch_size": 1,
+      "q_lengths": [
+        1
+      ],
+      "kv_lengths": [
+        32725
+      ],
+      "num_tokens": 1,
+      "operators": {
+        "gemm": [
+          {
+            "name": "qkv_proj",
+            "type": "ColumnParallelLinear",
+            "M": 1,
+            "N": 7168,
+            "K": 5120,
+            "count": 48
+          },
+          {
+            "name": "o_proj",
+            "type": "RowParallelLinear",
+            "M": 1,
+            "N": 5120,
+            "K": 5120,
+            "count": 48
+          },
+          {
+            "name": "gate_up_proj",
+            "type": "MergedColumnParallelLinear",
+            "M": 1,
+            "N": 27648,
+            "K": 5120,
+            "count": 48
+          },
+          {
+            "name": "down_proj",
+            "type": "RowParallelLinear",
+            "M": 1,
+            "N": 5120,
+            "K": 13824,
+            "count": 48
+          },
+          {
+            "name": "lm_head",
+            "type": "Linear",
+            "M": 1,
+            "N": 152064,
+            "K": 5120,
+            "count": 1
+          }
+        ],
+        "attention": {
+          "attention_type": "fa2_paged",
+          "bs": 1,
+          "q_lengths": [
+            1
+          ],
+          "kv_lengths": [
+            32725
+          ],
+          "nh": 40,
+          "nkv": 8,
+          "hd": 128,
+          "count": 48
+        },
+        "rmsnorm": {
+          "seq": 1,
+          "dim": 5120,
+          "count": 97
+        },
+        "siluandmul": {
+          "seq": 1,
+          "dim": 27648,
+          "count": 48
+        },
+        "communication": []
+      }
+    },
+    {
+      "iteration": 7,
+      "phase": "decode",
+      "batch_size": 1,
+      "q_lengths": [
+        1
+      ],
+      "kv_lengths": [
+        32726
+      ],
+      "num_tokens": 1,
+      "operators": {
+        "gemm": [
+          {
+            "name": "qkv_proj",
+            "type": "ColumnParallelLinear",
+            "M": 1,
+            "N": 7168,
+            "K": 5120,
+            "count": 48
+          },
+          {
+            "name": "o_proj",
+            "type": "RowParallelLinear",
+            "M": 1,
+            "N": 5120,
+            "K": 5120,
+            "count": 48
+          },
+          {
+            "name": "gate_up_proj",
+            "type": "MergedColumnParallelLinear",
+            "M": 1,
+            "N": 27648,
+            "K": 5120,
+            "count": 48
+          },
+          {
+            "name": "down_proj",
+            "type": "RowParallelLinear",
+            "M": 1,
+            "N": 5120,
+            "K": 13824,
+            "count": 48
+          },
+          {
+            "name": "lm_head",
+            "type": "Linear",
+            "M": 1,
+            "N": 152064,
+            "K": 5120,
+            "count": 1
+          }
+        ],
+        "attention": {
+          "attention_type": "fa2_paged",
+          "bs": 1,
+          "q_lengths": [
+            1
+          ],
+          "kv_lengths": [
+            32726
+          ],
+          "nh": 40,
+          "nkv": 8,
+          "hd": 128,
+          "count": 48
+        },
+        "rmsnorm": {
+          "seq": 1,
+          "dim": 5120,
+          "count": 97
+        },
+        "siluandmul": {
+          "seq": 1,
+          "dim": 27648,
+          "count": 48
+        },
+        "communication": []
+      }
+    },
+    {
+      "iteration": 8,
+      "phase": "decode",
+      "batch_size": 1,
+      "q_lengths": [
+        1
+      ],
+      "kv_lengths": [
+        32727
+      ],
+      "num_tokens": 1,
+      "operators": {
+        "gemm": [
+          {
+            "name": "qkv_proj",
+            "type": "ColumnParallelLinear",
+            "M": 1,
+            "N": 7168,
+            "K": 5120,
+            "count": 48
+          },
+          {
+            "name": "o_proj",
+            "type": "RowParallelLinear",
+            "M": 1,
+            "N": 5120,
+            "K": 5120,
+            "count": 48
+          },
+          {
+            "name": "gate_up_proj",
+            "type": "MergedColumnParallelLinear",
+            "M": 1,
+            "N": 27648,
+            "K": 5120,
+            "count": 48
+          },
+          {
+            "name": "down_proj",
+            "type": "RowParallelLinear",
+            "M": 1,
+            "N": 5120,
+            "K": 13824,
+            "count": 48
+          },
+          {
+            "name": "lm_head",
+            "type": "Linear",
+            "M": 1,
+            "N": 152064,
+            "K": 5120,
+            "count": 1
+          }
+        ],
+        "attention": {
+          "attention_type": "fa2_paged",
+          "bs": 1,
+          "q_lengths": [
+            1
+          ],
+          "kv_lengths": [
+            32727
+          ],
+          "nh": 40,
+          "nkv": 8,
+          "hd": 128,
+          "count": 48
+        },
+        "rmsnorm": {
+          "seq": 1,
+          "dim": 5120,
+          "count": 97
+        },
+        "siluandmul": {
+          "seq": 1,
+          "dim": 27648,
+          "count": 48
+        },
+        "communication": []
+      }
+    },
+    {
+      "iteration": 9,
+      "phase": "decode",
+      "batch_size": 1,
+      "q_lengths": [
+        1
+      ],
+      "kv_lengths": [
+        32728
+      ],
+      "num_tokens": 1,
+      "operators": {
+        "gemm": [
+          {
+            "name": "qkv_proj",
+            "type": "ColumnParallelLinear",
+            "M": 1,
+            "N": 7168,
+            "K": 5120,
+            "count": 48
+          },
+          {
+            "name": "o_proj",
+            "type": "RowParallelLinear",
+            "M": 1,
+            "N": 5120,
+            "K": 5120,
+            "count": 48
+          },
+          {
+            "name": "gate_up_proj",
+            "type": "MergedColumnParallelLinear",
+            "M": 1,
+            "N": 27648,
+            "K": 5120,
+            "count": 48
+          },
+          {
+            "name": "down_proj",
+            "type": "RowParallelLinear",
+            "M": 1,
+            "N": 5120,
+            "K": 13824,
+            "count": 48
+          },
+          {
+            "name": "lm_head",
+            "type": "Linear",
+            "M": 1,
+            "N": 152064,
+            "K": 5120,
+            "count": 1
+          }
+        ],
+        "attention": {
+          "attention_type": "fa2_paged",
+          "bs": 1,
+          "q_lengths": [
+            1
+          ],
+          "kv_lengths": [
+            32728
+          ],
+          "nh": 40,
+          "nkv": 8,
+          "hd": 128,
+          "count": 48
+        },
+        "rmsnorm": {
+          "seq": 1,
+          "dim": 5120,
+          "count": 97
+        },
+        "siluandmul": {
+          "seq": 1,
+          "dim": 27648,
+          "count": 48
+        },
+        "communication": []
+      }
+    },
+    {
+      "iteration": 10,
+      "phase": "decode",
+      "batch_size": 1,
+      "q_lengths": [
+        1
+      ],
+      "kv_lengths": [
+        32729
+      ],
+      "num_tokens": 1,
+      "operators": {
+        "gemm": [
+          {
+            "name": "qkv_proj",
+            "type": "ColumnParallelLinear",
+            "M": 1,
+            "N": 7168,
+            "K": 5120,
+            "count": 48
+          },
+          {
+            "name": "o_proj",
+            "type": "RowParallelLinear",
+            "M": 1,
+            "N": 5120,
+            "K": 5120,
+            "count": 48
+          },
+          {
+            "name": "gate_up_proj",
+            "type": "MergedColumnParallelLinear",
+            "M": 1,
+            "N": 27648,
+            "K": 5120,
+            "count": 48
+          },
+          {
+            "name": "down_proj",
+            "type": "RowParallelLinear",
+            "M": 1,
+            "N": 5120,
+            "K": 13824,
+            "count": 48
+          },
+          {
+            "name": "lm_head",
+            "type": "Linear",
+            "M": 1,
+            "N": 152064,
+            "K": 5120,
+            "count": 1
+          }
+        ],
+        "attention": {
+          "attention_type": "fa2_paged",
+          "bs": 1,
+          "q_lengths": [
+            1
+          ],
+          "kv_lengths": [
+            32729
+          ],
+          "nh": 40,
+          "nkv": 8,
+          "hd": 128,
+          "count": 48
+        },
+        "rmsnorm": {
+          "seq": 1,
+          "dim": 5120,
+          "count": 97
+        },
+        "siluandmul": {
+          "seq": 1,
+          "dim": 27648,
+          "count": 48
+        },
+        "communication": []
+      }
+    },
+    {
+      "iteration": 11,
+      "phase": "decode",
+      "batch_size": 1,
+      "q_lengths": [
+        1
+      ],
+      "kv_lengths": [
+        32730
+      ],
+      "num_tokens": 1,
+      "operators": {
+        "gemm": [
+          {
+            "name": "qkv_proj",
+            "type": "ColumnParallelLinear",
+            "M": 1,
+            "N": 7168,
+            "K": 5120,
+            "count": 48
+          },
+          {
+            "name": "o_proj",
+            "type": "RowParallelLinear",
+            "M": 1,
+            "N": 5120,
+            "K": 5120,
+            "count": 48
+          },
+          {
+            "name": "gate_up_proj",
+            "type": "MergedColumnParallelLinear",
+            "M": 1,
+            "N": 27648,
+            "K": 5120,
+            "count": 48
+          },
+          {
+            "name": "down_proj",
+            "type": "RowParallelLinear",
+            "M": 1,
+            "N": 5120,
+            "K": 13824,
+            "count": 48
+          },
+          {
+            "name": "lm_head",
+            "type": "Linear",
+            "M": 1,
+            "N": 152064,
+            "K": 5120,
+            "count": 1
+          }
+        ],
+        "attention": {
+          "attention_type": "fa2_paged",
+          "bs": 1,
+          "q_lengths": [
+            1
+          ],
+          "kv_lengths": [
+            32730
+          ],
+          "nh": 40,
+          "nkv": 8,
+          "hd": 128,
+          "count": 48
+        },
+        "rmsnorm": {
+          "seq": 1,
+          "dim": 5120,
+          "count": 97
+        },
+        "siluandmul": {
+          "seq": 1,
+          "dim": 27648,
+          "count": 48
+        },
+        "communication": []
+      }
+    },
+    {
+      "iteration": 12,
+      "phase": "decode",
+      "batch_size": 1,
+      "q_lengths": [
+        1
+      ],
+      "kv_lengths": [
+        32731
+      ],
+      "num_tokens": 1,
+      "operators": {
+        "gemm": [
+          {
+            "name": "qkv_proj",
+            "type": "ColumnParallelLinear",
+            "M": 1,
+            "N": 7168,
+            "K": 5120,
+            "count": 48
+          },
+          {
+            "name": "o_proj",
+            "type": "RowParallelLinear",
+            "M": 1,
+            "N": 5120,
+            "K": 5120,
+            "count": 48
+          },
+          {
+            "name": "gate_up_proj",
+            "type": "MergedColumnParallelLinear",
+            "M": 1,
+            "N": 27648,
+            "K": 5120,
+            "count": 48
+          },
+          {
+            "name": "down_proj",
+            "type": "RowParallelLinear",
+            "M": 1,
+            "N": 5120,
+            "K": 13824,
+            "count": 48
+          },
+          {
+            "name": "lm_head",
+            "type": "Linear",
+            "M": 1,
+            "N": 152064,
+            "K": 5120,
+            "count": 1
+          }
+        ],
+        "attention": {
+          "attention_type": "fa2_paged",
+          "bs": 1,
+          "q_lengths": [
+            1
+          ],
+          "kv_lengths": [
+            32731
+          ],
+          "nh": 40,
+          "nkv": 8,
+          "hd": 128,
+          "count": 48
+        },
+        "rmsnorm": {
+          "seq": 1,
+          "dim": 5120,
+          "count": 97
+        },
+        "siluandmul": {
+          "seq": 1,
+          "dim": 27648,
+          "count": 48
+        },
+        "communication": []
+      }
+    },
+    {
+      "iteration": 13,
+      "phase": "decode",
+      "batch_size": 1,
+      "q_lengths": [
+        1
+      ],
+      "kv_lengths": [
+        32732
+      ],
+      "num_tokens": 1,
+      "operators": {
+        "gemm": [
+          {
+            "name": "qkv_proj",
+            "type": "ColumnParallelLinear",
+            "M": 1,
+            "N": 7168,
+            "K": 5120,
+            "count": 48
+          },
+          {
+            "name": "o_proj",
+            "type": "RowParallelLinear",
+            "M": 1,
+            "N": 5120,
+            "K": 5120,
+            "count": 48
+          },
+          {
+            "name": "gate_up_proj",
+            "type": "MergedColumnParallelLinear",
+            "M": 1,
+            "N": 27648,
+            "K": 5120,
+            "count": 48
+          },
+          {
+            "name": "down_proj",
+            "type": "RowParallelLinear",
+            "M": 1,
+            "N": 5120,
+            "K": 13824,
+            "count": 48
+          },
+          {
+            "name": "lm_head",
+            "type": "Linear",
+            "M": 1,
+            "N": 152064,
+            "K": 5120,
+            "count": 1
+          }
+        ],
+        "attention": {
+          "attention_type": "fa2_paged",
+          "bs": 1,
+          "q_lengths": [
+            1
+          ],
+          "kv_lengths": [
+            32732
+          ],
+          "nh": 40,
+          "nkv": 8,
+          "hd": 128,
+          "count": 48
+        },
+        "rmsnorm": {
+          "seq": 1,
+          "dim": 5120,
+          "count": 97
+        },
+        "siluandmul": {
+          "seq": 1,
+          "dim": 27648,
+          "count": 48
+        },
+        "communication": []
+      }
+    },
+    {
+      "iteration": 14,
+      "phase": "decode",
+      "batch_size": 1,
+      "q_lengths": [
+        1
+      ],
+      "kv_lengths": [
+        32733
+      ],
+      "num_tokens": 1,
+      "operators": {
+        "gemm": [
+          {
+            "name": "qkv_proj",
+            "type": "ColumnParallelLinear",
+            "M": 1,
+            "N": 7168,
+            "K": 5120,
+            "count": 48
+          },
+          {
+            "name": "o_proj",
+            "type": "RowParallelLinear",
+            "M": 1,
+            "N": 5120,
+            "K": 5120,
+            "count": 48
+          },
+          {
+            "name": "gate_up_proj",
+            "type": "MergedColumnParallelLinear",
+            "M": 1,
+            "N": 27648,
+            "K": 5120,
+            "count": 48
+          },
+          {
+            "name": "down_proj",
+            "type": "RowParallelLinear",
+            "M": 1,
+            "N": 5120,
+            "K": 13824,
+            "count": 48
+          },
+          {
+            "name": "lm_head",
+            "type": "Linear",
+            "M": 1,
+            "N": 152064,
+            "K": 5120,
+            "count": 1
+          }
+        ],
+        "attention": {
+          "attention_type": "fa2_paged",
+          "bs": 1,
+          "q_lengths": [
+            1
+          ],
+          "kv_lengths": [
+            32733
+          ],
+          "nh": 40,
+          "nkv": 8,
+          "hd": 128,
+          "count": 48
+        },
+        "rmsnorm": {
+          "seq": 1,
+          "dim": 5120,
+          "count": 97
+        },
+        "siluandmul": {
+          "seq": 1,
+          "dim": 27648,
+          "count": 48
+        },
+        "communication": []
+      }
+    },
+    {
+      "iteration": 15,
+      "phase": "decode",
+      "batch_size": 1,
+      "q_lengths": [
+        1
+      ],
+      "kv_lengths": [
+        32734
+      ],
+      "num_tokens": 1,
+      "operators": {
+        "gemm": [
+          {
+            "name": "qkv_proj",
+            "type": "ColumnParallelLinear",
+            "M": 1,
+            "N": 7168,
+            "K": 5120,
+            "count": 48
+          },
+          {
+            "name": "o_proj",
+            "type": "RowParallelLinear",
+            "M": 1,
+            "N": 5120,
+            "K": 5120,
+            "count": 48
+          },
+          {
+            "name": "gate_up_proj",
+            "type": "MergedColumnParallelLinear",
+            "M": 1,
+            "N": 27648,
+            "K": 5120,
+            "count": 48
+          },
+          {
+            "name": "down_proj",
+            "type": "RowParallelLinear",
+            "M": 1,
+            "N": 5120,
+            "K": 13824,
+            "count": 48
+          },
+          {
+            "name": "lm_head",
+            "type": "Linear",
+            "M": 1,
+            "N": 152064,
+            "K": 5120,
+            "count": 1
+          }
+        ],
+        "attention": {
+          "attention_type": "fa2_paged",
+          "bs": 1,
+          "q_lengths": [
+            1
+          ],
+          "kv_lengths": [
+            32734
+          ],
+          "nh": 40,
+          "nkv": 8,
+          "hd": 128,
+          "count": 48
+        },
+        "rmsnorm": {
+          "seq": 1,
+          "dim": 5120,
+          "count": 97
+        },
+        "siluandmul": {
+          "seq": 1,
+          "dim": 27648,
+          "count": 48
+        },
+        "communication": []
+      }
+    },
+    {
+      "iteration": 16,
+      "phase": "decode",
+      "batch_size": 1,
+      "q_lengths": [
+        1
+      ],
+      "kv_lengths": [
+        32735
+      ],
+      "num_tokens": 1,
+      "operators": {
+        "gemm": [
+          {
+            "name": "qkv_proj",
+            "type": "ColumnParallelLinear",
+            "M": 1,
+            "N": 7168,
+            "K": 5120,
+            "count": 48
+          },
+          {
+            "name": "o_proj",
+            "type": "RowParallelLinear",
+            "M": 1,
+            "N": 5120,
+            "K": 5120,
+            "count": 48
+          },
+          {
+            "name": "gate_up_proj",
+            "type": "MergedColumnParallelLinear",
+            "M": 1,
+            "N": 27648,
+            "K": 5120,
+            "count": 48
+          },
+          {
+            "name": "down_proj",
+            "type": "RowParallelLinear",
+            "M": 1,
+            "N": 5120,
+            "K": 13824,
+            "count": 48
+          },
+          {
+            "name": "lm_head",
+            "type": "Linear",
+            "M": 1,
+            "N": 152064,
+            "K": 5120,
+            "count": 1
+          }
+        ],
+        "attention": {
+          "attention_type": "fa2_paged",
+          "bs": 1,
+          "q_lengths": [
+            1
+          ],
+          "kv_lengths": [
+            32735
+          ],
+          "nh": 40,
+          "nkv": 8,
+          "hd": 128,
+          "count": 48
+        },
+        "rmsnorm": {
+          "seq": 1,
+          "dim": 5120,
+          "count": 97
+        },
+        "siluandmul": {
+          "seq": 1,
+          "dim": 27648,
+          "count": 48
+        },
+        "communication": []
+      }
+    },
+    {
+      "iteration": 17,
+      "phase": "decode",
+      "batch_size": 1,
+      "q_lengths": [
+        1
+      ],
+      "kv_lengths": [
+        32736
+      ],
+      "num_tokens": 1,
+      "operators": {
+        "gemm": [
+          {
+            "name": "qkv_proj",
+            "type": "ColumnParallelLinear",
+            "M": 1,
+            "N": 7168,
+            "K": 5120,
+            "count": 48
+          },
+          {
+            "name": "o_proj",
+            "type": "RowParallelLinear",
+            "M": 1,
+            "N": 5120,
+            "K": 5120,
+            "count": 48
+          },
+          {
+            "name": "gate_up_proj",
+            "type": "MergedColumnParallelLinear",
+            "M": 1,
+            "N": 27648,
+            "K": 5120,
+            "count": 48
+          },
+          {
+            "name": "down_proj",
+            "type": "RowParallelLinear",
+            "M": 1,
+            "N": 5120,
+            "K": 13824,
+            "count": 48
+          },
+          {
+            "name": "lm_head",
+            "type": "Linear",
+            "M": 1,
+            "N": 152064,
+            "K": 5120,
+            "count": 1
+          }
+        ],
+        "attention": {
+          "attention_type": "fa2_paged",
+          "bs": 1,
+          "q_lengths": [
+            1
+          ],
+          "kv_lengths": [
+            32736
+          ],
+          "nh": 40,
+          "nkv": 8,
+          "hd": 128,
+          "count": 48
+        },
+        "rmsnorm": {
+          "seq": 1,
+          "dim": 5120,
+          "count": 97
+        },
+        "siluandmul": {
+          "seq": 1,
+          "dim": 27648,
+          "count": 48
+        },
+        "communication": []
+      }
+    },
+    {
+      "iteration": 18,
+      "phase": "decode",
+      "batch_size": 1,
+      "q_lengths": [
+        1
+      ],
+      "kv_lengths": [
+        32737
+      ],
+      "num_tokens": 1,
+      "operators": {
+        "gemm": [
+          {
+            "name": "qkv_proj",
+            "type": "ColumnParallelLinear",
+            "M": 1,
+            "N": 7168,
+            "K": 5120,
+            "count": 48
+          },
+          {
+            "name": "o_proj",
+            "type": "RowParallelLinear",
+            "M": 1,
+            "N": 5120,
+            "K": 5120,
+            "count": 48
+          },
+          {
+            "name": "gate_up_proj",
+            "type": "MergedColumnParallelLinear",
+            "M": 1,
+            "N": 27648,
+            "K": 5120,
+            "count": 48
+          },
+          {
+            "name": "down_proj",
+            "type": "RowParallelLinear",
+            "M": 1,
+            "N": 5120,
+            "K": 13824,
+            "count": 48
+          },
+          {
+            "name": "lm_head",
+            "type": "Linear",
+            "M": 1,
+            "N": 152064,
+            "K": 5120,
+            "count": 1
+          }
+        ],
+        "attention": {
+          "attention_type": "fa2_paged",
+          "bs": 1,
+          "q_lengths": [
+            1
+          ],
+          "kv_lengths": [
+            32737
+          ],
+          "nh": 40,
+          "nkv": 8,
+          "hd": 128,
+          "count": 48
+        },
+        "rmsnorm": {
+          "seq": 1,
+          "dim": 5120,
+          "count": 97
+        },
+        "siluandmul": {
+          "seq": 1,
+          "dim": 27648,
+          "count": 48
+        },
+        "communication": []
+      }
+    },
+    {
+      "iteration": 19,
+      "phase": "decode",
+      "batch_size": 1,
+      "q_lengths": [
+        1
+      ],
+      "kv_lengths": [
+        32738
+      ],
+      "num_tokens": 1,
+      "operators": {
+        "gemm": [
+          {
+            "name": "qkv_proj",
+            "type": "ColumnParallelLinear",
+            "M": 1,
+            "N": 7168,
+            "K": 5120,
+            "count": 48
+          },
+          {
+            "name": "o_proj",
+            "type": "RowParallelLinear",
+            "M": 1,
+            "N": 5120,
+            "K": 5120,
+            "count": 48
+          },
+          {
+            "name": "gate_up_proj",
+            "type": "MergedColumnParallelLinear",
+            "M": 1,
+            "N": 27648,
+            "K": 5120,
+            "count": 48
+          },
+          {
+            "name": "down_proj",
+            "type": "RowParallelLinear",
+            "M": 1,
+            "N": 5120,
+            "K": 13824,
+            "count": 48
+          },
+          {
+            "name": "lm_head",
+            "type": "Linear",
+            "M": 1,
+            "N": 152064,
+            "K": 5120,
+            "count": 1
+          }
+        ],
+        "attention": {
+          "attention_type": "fa2_paged",
+          "bs": 1,
+          "q_lengths": [
+            1
+          ],
+          "kv_lengths": [
+            32738
+          ],
+          "nh": 40,
+          "nkv": 8,
+          "hd": 128,
+          "count": 48
+        },
+        "rmsnorm": {
+          "seq": 1,
+          "dim": 5120,
+          "count": 97
+        },
+        "siluandmul": {
+          "seq": 1,
+          "dim": 27648,
+          "count": 48
+        },
+        "communication": []
+      }
+    },
+    {
+      "iteration": 20,
+      "phase": "decode",
+      "batch_size": 1,
+      "q_lengths": [
+        1
+      ],
+      "kv_lengths": [
+        32739
+      ],
+      "num_tokens": 1,
+      "operators": {
+        "gemm": [
+          {
+            "name": "qkv_proj",
+            "type": "ColumnParallelLinear",
+            "M": 1,
+            "N": 7168,
+            "K": 5120,
+            "count": 48
+          },
+          {
+            "name": "o_proj",
+            "type": "RowParallelLinear",
+            "M": 1,
+            "N": 5120,
+            "K": 5120,
+            "count": 48
+          },
+          {
+            "name": "gate_up_proj",
+            "type": "MergedColumnParallelLinear",
+            "M": 1,
+            "N": 27648,
+            "K": 5120,
+            "count": 48
+          },
+          {
+            "name": "down_proj",
+            "type": "RowParallelLinear",
+            "M": 1,
+            "N": 5120,
+            "K": 13824,
+            "count": 48
+          },
+          {
+            "name": "lm_head",
+            "type": "Linear",
+            "M": 1,
+            "N": 152064,
+            "K": 5120,
+            "count": 1
+          }
+        ],
+        "attention": {
+          "attention_type": "fa2_paged",
+          "bs": 1,
+          "q_lengths": [
+            1
+          ],
+          "kv_lengths": [
+            32739
+          ],
+          "nh": 40,
+          "nkv": 8,
+          "hd": 128,
+          "count": 48
+        },
+        "rmsnorm": {
+          "seq": 1,
+          "dim": 5120,
+          "count": 97
+        },
+        "siluandmul": {
+          "seq": 1,
+          "dim": 27648,
+          "count": 48
+        },
+        "communication": []
+      }
+    },
+    {
+      "iteration": 21,
+      "phase": "decode",
+      "batch_size": 1,
+      "q_lengths": [
+        1
+      ],
+      "kv_lengths": [
+        32740
+      ],
+      "num_tokens": 1,
+      "operators": {
+        "gemm": [
+          {
+            "name": "qkv_proj",
+            "type": "ColumnParallelLinear",
+            "M": 1,
+            "N": 7168,
+            "K": 5120,
+            "count": 48
+          },
+          {
+            "name": "o_proj",
+            "type": "RowParallelLinear",
+            "M": 1,
+            "N": 5120,
+            "K": 5120,
+            "count": 48
+          },
+          {
+            "name": "gate_up_proj",
+            "type": "MergedColumnParallelLinear",
+            "M": 1,
+            "N": 27648,
+            "K": 5120,
+            "count": 48
+          },
+          {
+            "name": "down_proj",
+            "type": "RowParallelLinear",
+            "M": 1,
+            "N": 5120,
+            "K": 13824,
+            "count": 48
+          },
+          {
+            "name": "lm_head",
+            "type": "Linear",
+            "M": 1,
+            "N": 152064,
+            "K": 5120,
+            "count": 1
+          }
+        ],
+        "attention": {
+          "attention_type": "fa2_paged",
+          "bs": 1,
+          "q_lengths": [
+            1
+          ],
+          "kv_lengths": [
+            32740
+          ],
+          "nh": 40,
+          "nkv": 8,
+          "hd": 128,
+          "count": 48
+        },
+        "rmsnorm": {
+          "seq": 1,
+          "dim": 5120,
+          "count": 97
+        },
+        "siluandmul": {
+          "seq": 1,
+          "dim": 27648,
+          "count": 48
+        },
+        "communication": []
+      }
+    },
+    {
+      "iteration": 22,
+      "phase": "decode",
+      "batch_size": 1,
+      "q_lengths": [
+        1
+      ],
+      "kv_lengths": [
+        32741
+      ],
+      "num_tokens": 1,
+      "operators": {
+        "gemm": [
+          {
+            "name": "qkv_proj",
+            "type": "ColumnParallelLinear",
+            "M": 1,
+            "N": 7168,
+            "K": 5120,
+            "count": 48
+          },
+          {
+            "name": "o_proj",
+            "type": "RowParallelLinear",
+            "M": 1,
+            "N": 5120,
+            "K": 5120,
+            "count": 48
+          },
+          {
+            "name": "gate_up_proj",
+            "type": "MergedColumnParallelLinear",
+            "M": 1,
+            "N": 27648,
+            "K": 5120,
+            "count": 48
+          },
+          {
+            "name": "down_proj",
+            "type": "RowParallelLinear",
+            "M": 1,
+            "N": 5120,
+            "K": 13824,
+            "count": 48
+          },
+          {
+            "name": "lm_head",
+            "type": "Linear",
+            "M": 1,
+            "N": 152064,
+            "K": 5120,
+            "count": 1
+          }
+        ],
+        "attention": {
+          "attention_type": "fa2_paged",
+          "bs": 1,
+          "q_lengths": [
+            1
+          ],
+          "kv_lengths": [
+            32741
+          ],
+          "nh": 40,
+          "nkv": 8,
+          "hd": 128,
+          "count": 48
+        },
+        "rmsnorm": {
+          "seq": 1,
+          "dim": 5120,
+          "count": 97
+        },
+        "siluandmul": {
+          "seq": 1,
+          "dim": 27648,
+          "count": 48
+        },
+        "communication": []
+      }
+    },
+    {
+      "iteration": 23,
+      "phase": "decode",
+      "batch_size": 1,
+      "q_lengths": [
+        1
+      ],
+      "kv_lengths": [
+        32742
+      ],
+      "num_tokens": 1,
+      "operators": {
+        "gemm": [
+          {
+            "name": "qkv_proj",
+            "type": "ColumnParallelLinear",
+            "M": 1,
+            "N": 7168,
+            "K": 5120,
+            "count": 48
+          },
+          {
+            "name": "o_proj",
+            "type": "RowParallelLinear",
+            "M": 1,
+            "N": 5120,
+            "K": 5120,
+            "count": 48
+          },
+          {
+            "name": "gate_up_proj",
+            "type": "MergedColumnParallelLinear",
+            "M": 1,
+            "N": 27648,
+            "K": 5120,
+            "count": 48
+          },
+          {
+            "name": "down_proj",
+            "type": "RowParallelLinear",
+            "M": 1,
+            "N": 5120,
+            "K": 13824,
+            "count": 48
+          },
+          {
+            "name": "lm_head",
+            "type": "Linear",
+            "M": 1,
+            "N": 152064,
+            "K": 5120,
+            "count": 1
+          }
+        ],
+        "attention": {
+          "attention_type": "fa2_paged",
+          "bs": 1,
+          "q_lengths": [
+            1
+          ],
+          "kv_lengths": [
+            32742
+          ],
+          "nh": 40,
+          "nkv": 8,
+          "hd": 128,
+          "count": 48
+        },
+        "rmsnorm": {
+          "seq": 1,
+          "dim": 5120,
+          "count": 97
+        },
+        "siluandmul": {
+          "seq": 1,
+          "dim": 27648,
+          "count": 48
+        },
+        "communication": []
+      }
+    },
+    {
+      "iteration": 24,
+      "phase": "decode",
+      "batch_size": 1,
+      "q_lengths": [
+        1
+      ],
+      "kv_lengths": [
+        32743
+      ],
+      "num_tokens": 1,
+      "operators": {
+        "gemm": [
+          {
+            "name": "qkv_proj",
+            "type": "ColumnParallelLinear",
+            "M": 1,
+            "N": 7168,
+            "K": 5120,
+            "count": 48
+          },
+          {
+            "name": "o_proj",
+            "type": "RowParallelLinear",
+            "M": 1,
+            "N": 5120,
+            "K": 5120,
+            "count": 48
+          },
+          {
+            "name": "gate_up_proj",
+            "type": "MergedColumnParallelLinear",
+            "M": 1,
+            "N": 27648,
+            "K": 5120,
+            "count": 48
+          },
+          {
+            "name": "down_proj",
+            "type": "RowParallelLinear",
+            "M": 1,
+            "N": 5120,
+            "K": 13824,
+            "count": 48
+          },
+          {
+            "name": "lm_head",
+            "type": "Linear",
+            "M": 1,
+            "N": 152064,
+            "K": 5120,
+            "count": 1
+          }
+        ],
+        "attention": {
+          "attention_type": "fa2_paged",
+          "bs": 1,
+          "q_lengths": [
+            1
+          ],
+          "kv_lengths": [
+            32743
+          ],
+          "nh": 40,
+          "nkv": 8,
+          "hd": 128,
+          "count": 48
+        },
+        "rmsnorm": {
+          "seq": 1,
+          "dim": 5120,
+          "count": 97
+        },
+        "siluandmul": {
+          "seq": 1,
+          "dim": 27648,
+          "count": 48
+        },
+        "communication": []
+      }
+    },
+    {
+      "iteration": 25,
+      "phase": "decode",
+      "batch_size": 1,
+      "q_lengths": [
+        1
+      ],
+      "kv_lengths": [
+        32744
+      ],
+      "num_tokens": 1,
+      "operators": {
+        "gemm": [
+          {
+            "name": "qkv_proj",
+            "type": "ColumnParallelLinear",
+            "M": 1,
+            "N": 7168,
+            "K": 5120,
+            "count": 48
+          },
+          {
+            "name": "o_proj",
+            "type": "RowParallelLinear",
+            "M": 1,
+            "N": 5120,
+            "K": 5120,
+            "count": 48
+          },
+          {
+            "name": "gate_up_proj",
+            "type": "MergedColumnParallelLinear",
+            "M": 1,
+            "N": 27648,
+            "K": 5120,
+            "count": 48
+          },
+          {
+            "name": "down_proj",
+            "type": "RowParallelLinear",
+            "M": 1,
+            "N": 5120,
+            "K": 13824,
+            "count": 48
+          },
+          {
+            "name": "lm_head",
+            "type": "Linear",
+            "M": 1,
+            "N": 152064,
+            "K": 5120,
+            "count": 1
+          }
+        ],
+        "attention": {
+          "attention_type": "fa2_paged",
+          "bs": 1,
+          "q_lengths": [
+            1
+          ],
+          "kv_lengths": [
+            32744
+          ],
+          "nh": 40,
+          "nkv": 8,
+          "hd": 128,
+          "count": 48
+        },
+        "rmsnorm": {
+          "seq": 1,
+          "dim": 5120,
+          "count": 97
+        },
+        "siluandmul": {
+          "seq": 1,
+          "dim": 27648,
+          "count": 48
+        },
+        "communication": []
+      }
+    },
+    {
+      "iteration": 26,
+      "phase": "decode",
+      "batch_size": 1,
+      "q_lengths": [
+        1
+      ],
+      "kv_lengths": [
+        32745
+      ],
+      "num_tokens": 1,
+      "operators": {
+        "gemm": [
+          {
+            "name": "qkv_proj",
+            "type": "ColumnParallelLinear",
+            "M": 1,
+            "N": 7168,
+            "K": 5120,
+            "count": 48
+          },
+          {
+            "name": "o_proj",
+            "type": "RowParallelLinear",
+            "M": 1,
+            "N": 5120,
+            "K": 5120,
+            "count": 48
+          },
+          {
+            "name": "gate_up_proj",
+            "type": "MergedColumnParallelLinear",
+            "M": 1,
+            "N": 27648,
+            "K": 5120,
+            "count": 48
+          },
+          {
+            "name": "down_proj",
+            "type": "RowParallelLinear",
+            "M": 1,
+            "N": 5120,
+            "K": 13824,
+            "count": 48
+          },
+          {
+            "name": "lm_head",
+            "type": "Linear",
+            "M": 1,
+            "N": 152064,
+            "K": 5120,
+            "count": 1
+          }
+        ],
+        "attention": {
+          "attention_type": "fa2_paged",
+          "bs": 1,
+          "q_lengths": [
+            1
+          ],
+          "kv_lengths": [
+            32745
+          ],
+          "nh": 40,
+          "nkv": 8,
+          "hd": 128,
+          "count": 48
+        },
+        "rmsnorm": {
+          "seq": 1,
+          "dim": 5120,
+          "count": 97
+        },
+        "siluandmul": {
+          "seq": 1,
+          "dim": 27648,
+          "count": 48
+        },
+        "communication": []
+      }
+    },
+    {
+      "iteration": 27,
+      "phase": "decode",
+      "batch_size": 1,
+      "q_lengths": [
+        1
+      ],
+      "kv_lengths": [
+        32746
+      ],
+      "num_tokens": 1,
+      "operators": {
+        "gemm": [
+          {
+            "name": "qkv_proj",
+            "type": "ColumnParallelLinear",
+            "M": 1,
+            "N": 7168,
+            "K": 5120,
+            "count": 48
+          },
+          {
+            "name": "o_proj",
+            "type": "RowParallelLinear",
+            "M": 1,
+            "N": 5120,
+            "K": 5120,
+            "count": 48
+          },
+          {
+            "name": "gate_up_proj",
+            "type": "MergedColumnParallelLinear",
+            "M": 1,
+            "N": 27648,
+            "K": 5120,
+            "count": 48
+          },
+          {
+            "name": "down_proj",
+            "type": "RowParallelLinear",
+            "M": 1,
+            "N": 5120,
+            "K": 13824,
+            "count": 48
+          },
+          {
+            "name": "lm_head",
+            "type": "Linear",
+            "M": 1,
+            "N": 152064,
+            "K": 5120,
+            "count": 1
+          }
+        ],
+        "attention": {
+          "attention_type": "fa2_paged",
+          "bs": 1,
+          "q_lengths": [
+            1
+          ],
+          "kv_lengths": [
+            32746
+          ],
+          "nh": 40,
+          "nkv": 8,
+          "hd": 128,
+          "count": 48
+        },
+        "rmsnorm": {
+          "seq": 1,
+          "dim": 5120,
+          "count": 97
+        },
+        "siluandmul": {
+          "seq": 1,
+          "dim": 27648,
+          "count": 48
+        },
+        "communication": []
+      }
+    },
+    {
+      "iteration": 28,
+      "phase": "decode",
+      "batch_size": 1,
+      "q_lengths": [
+        1
+      ],
+      "kv_lengths": [
+        32747
+      ],
+      "num_tokens": 1,
+      "operators": {
+        "gemm": [
+          {
+            "name": "qkv_proj",
+            "type": "ColumnParallelLinear",
+            "M": 1,
+            "N": 7168,
+            "K": 5120,
+            "count": 48
+          },
+          {
+            "name": "o_proj",
+            "type": "RowParallelLinear",
+            "M": 1,
+            "N": 5120,
+            "K": 5120,
+            "count": 48
+          },
+          {
+            "name": "gate_up_proj",
+            "type": "MergedColumnParallelLinear",
+            "M": 1,
+            "N": 27648,
+            "K": 5120,
+            "count": 48
+          },
+          {
+            "name": "down_proj",
+            "type": "RowParallelLinear",
+            "M": 1,
+            "N": 5120,
+            "K": 13824,
+            "count": 48
+          },
+          {
+            "name": "lm_head",
+            "type": "Linear",
+            "M": 1,
+            "N": 152064,
+            "K": 5120,
+            "count": 1
+          }
+        ],
+        "attention": {
+          "attention_type": "fa2_paged",
+          "bs": 1,
+          "q_lengths": [
+            1
+          ],
+          "kv_lengths": [
+            32747
+          ],
+          "nh": 40,
+          "nkv": 8,
+          "hd": 128,
+          "count": 48
+        },
+        "rmsnorm": {
+          "seq": 1,
+          "dim": 5120,
+          "count": 97
+        },
+        "siluandmul": {
+          "seq": 1,
+          "dim": 27648,
+          "count": 48
+        },
+        "communication": []
+      }
+    },
+    {
+      "iteration": 29,
+      "phase": "decode",
+      "batch_size": 1,
+      "q_lengths": [
+        1
+      ],
+      "kv_lengths": [
+        32748
+      ],
+      "num_tokens": 1,
+      "operators": {
+        "gemm": [
+          {
+            "name": "qkv_proj",
+            "type": "ColumnParallelLinear",
+            "M": 1,
+            "N": 7168,
+            "K": 5120,
+            "count": 48
+          },
+          {
+            "name": "o_proj",
+            "type": "RowParallelLinear",
+            "M": 1,
+            "N": 5120,
+            "K": 5120,
+            "count": 48
+          },
+          {
+            "name": "gate_up_proj",
+            "type": "MergedColumnParallelLinear",
+            "M": 1,
+            "N": 27648,
+            "K": 5120,
+            "count": 48
+          },
+          {
+            "name": "down_proj",
+            "type": "RowParallelLinear",
+            "M": 1,
+            "N": 5120,
+            "K": 13824,
+            "count": 48
+          },
+          {
+            "name": "lm_head",
+            "type": "Linear",
+            "M": 1,
+            "N": 152064,
+            "K": 5120,
+            "count": 1
+          }
+        ],
+        "attention": {
+          "attention_type": "fa2_paged",
+          "bs": 1,
+          "q_lengths": [
+            1
+          ],
+          "kv_lengths": [
+            32748
+          ],
+          "nh": 40,
+          "nkv": 8,
+          "hd": 128,
+          "count": 48
+        },
+        "rmsnorm": {
+          "seq": 1,
+          "dim": 5120,
+          "count": 97
+        },
+        "siluandmul": {
+          "seq": 1,
+          "dim": 27648,
+          "count": 48
+        },
+        "communication": []
+      }
+    },
+    {
+      "iteration": 30,
+      "phase": "decode",
+      "batch_size": 1,
+      "q_lengths": [
+        1
+      ],
+      "kv_lengths": [
+        32749
+      ],
+      "num_tokens": 1,
+      "operators": {
+        "gemm": [
+          {
+            "name": "qkv_proj",
+            "type": "ColumnParallelLinear",
+            "M": 1,
+            "N": 7168,
+            "K": 5120,
+            "count": 48
+          },
+          {
+            "name": "o_proj",
+            "type": "RowParallelLinear",
+            "M": 1,
+            "N": 5120,
+            "K": 5120,
+            "count": 48
+          },
+          {
+            "name": "gate_up_proj",
+            "type": "MergedColumnParallelLinear",
+            "M": 1,
+            "N": 27648,
+            "K": 5120,
+            "count": 48
+          },
+          {
+            "name": "down_proj",
+            "type": "RowParallelLinear",
+            "M": 1,
+            "N": 5120,
+            "K": 13824,
+            "count": 48
+          },
+          {
+            "name": "lm_head",
+            "type": "Linear",
+            "M": 1,
+            "N": 152064,
+            "K": 5120,
+            "count": 1
+          }
+        ],
+        "attention": {
+          "attention_type": "fa2_paged",
+          "bs": 1,
+          "q_lengths": [
+            1
+          ],
+          "kv_lengths": [
+            32749
+          ],
+          "nh": 40,
+          "nkv": 8,
+          "hd": 128,
+          "count": 48
+        },
+        "rmsnorm": {
+          "seq": 1,
+          "dim": 5120,
+          "count": 97
+        },
+        "siluandmul": {
+          "seq": 1,
+          "dim": 27648,
+          "count": 48
+        },
+        "communication": []
+      }
+    },
+    {
+      "iteration": 31,
+      "phase": "decode",
+      "batch_size": 1,
+      "q_lengths": [
+        1
+      ],
+      "kv_lengths": [
+        32750
+      ],
+      "num_tokens": 1,
+      "operators": {
+        "gemm": [
+          {
+            "name": "qkv_proj",
+            "type": "ColumnParallelLinear",
+            "M": 1,
+            "N": 7168,
+            "K": 5120,
+            "count": 48
+          },
+          {
+            "name": "o_proj",
+            "type": "RowParallelLinear",
+            "M": 1,
+            "N": 5120,
+            "K": 5120,
+            "count": 48
+          },
+          {
+            "name": "gate_up_proj",
+            "type": "MergedColumnParallelLinear",
+            "M": 1,
+            "N": 27648,
+            "K": 5120,
+            "count": 48
+          },
+          {
+            "name": "down_proj",
+            "type": "RowParallelLinear",
+            "M": 1,
+            "N": 5120,
+            "K": 13824,
+            "count": 48
+          },
+          {
+            "name": "lm_head",
+            "type": "Linear",
+            "M": 1,
+            "N": 152064,
+            "K": 5120,
+            "count": 1
+          }
+        ],
+        "attention": {
+          "attention_type": "fa2_paged",
+          "bs": 1,
+          "q_lengths": [
+            1
+          ],
+          "kv_lengths": [
+            32750
+          ],
+          "nh": 40,
+          "nkv": 8,
+          "hd": 128,
+          "count": 48
+        },
+        "rmsnorm": {
+          "seq": 1,
+          "dim": 5120,
+          "count": 97
+        },
+        "siluandmul": {
+          "seq": 1,
+          "dim": 27648,
+          "count": 48
+        },
+        "communication": []
+      }
+    },
+    {
+      "iteration": 32,
+      "phase": "decode",
+      "batch_size": 1,
+      "q_lengths": [
+        1
+      ],
+      "kv_lengths": [
+        32751
+      ],
+      "num_tokens": 1,
+      "operators": {
+        "gemm": [
+          {
+            "name": "qkv_proj",
+            "type": "ColumnParallelLinear",
+            "M": 1,
+            "N": 7168,
+            "K": 5120,
+            "count": 48
+          },
+          {
+            "name": "o_proj",
+            "type": "RowParallelLinear",
+            "M": 1,
+            "N": 5120,
+            "K": 5120,
+            "count": 48
+          },
+          {
+            "name": "gate_up_proj",
+            "type": "MergedColumnParallelLinear",
+            "M": 1,
+            "N": 27648,
+            "K": 5120,
+            "count": 48
+          },
+          {
+            "name": "down_proj",
+            "type": "RowParallelLinear",
+            "M": 1,
+            "N": 5120,
+            "K": 13824,
+            "count": 48
+          },
+          {
+            "name": "lm_head",
+            "type": "Linear",
+            "M": 1,
+            "N": 152064,
+            "K": 5120,
+            "count": 1
+          }
+        ],
+        "attention": {
+          "attention_type": "fa2_paged",
+          "bs": 1,
+          "q_lengths": [
+            1
+          ],
+          "kv_lengths": [
+            32751
+          ],
+          "nh": 40,
+          "nkv": 8,
+          "hd": 128,
+          "count": 48
+        },
+        "rmsnorm": {
+          "seq": 1,
+          "dim": 5120,
+          "count": 97
+        },
+        "siluandmul": {
+          "seq": 1,
+          "dim": 27648,
+          "count": 48
+        },
+        "communication": []
+      }
+    },
+    {
+      "iteration": 33,
+      "phase": "decode",
+      "batch_size": 1,
+      "q_lengths": [
+        1
+      ],
+      "kv_lengths": [
+        32752
+      ],
+      "num_tokens": 1,
+      "operators": {
+        "gemm": [
+          {
+            "name": "qkv_proj",
+            "type": "ColumnParallelLinear",
+            "M": 1,
+            "N": 7168,
+            "K": 5120,
+            "count": 48
+          },
+          {
+            "name": "o_proj",
+            "type": "RowParallelLinear",
+            "M": 1,
+            "N": 5120,
+            "K": 5120,
+            "count": 48
+          },
+          {
+            "name": "gate_up_proj",
+            "type": "MergedColumnParallelLinear",
+            "M": 1,
+            "N": 27648,
+            "K": 5120,
+            "count": 48
+          },
+          {
+            "name": "down_proj",
+            "type": "RowParallelLinear",
+            "M": 1,
+            "N": 5120,
+            "K": 13824,
+            "count": 48
+          },
+          {
+            "name": "lm_head",
+            "type": "Linear",
+            "M": 1,
+            "N": 152064,
+            "K": 5120,
+            "count": 1
+          }
+        ],
+        "attention": {
+          "attention_type": "fa2_paged",
+          "bs": 1,
+          "q_lengths": [
+            1
+          ],
+          "kv_lengths": [
+            32752
+          ],
+          "nh": 40,
+          "nkv": 8,
+          "hd": 128,
+          "count": 48
+        },
+        "rmsnorm": {
+          "seq": 1,
+          "dim": 5120,
+          "count": 97
+        },
+        "siluandmul": {
+          "seq": 1,
+          "dim": 27648,
+          "count": 48
+        },
+        "communication": []
+      }
+    },
+    {
+      "iteration": 34,
+      "phase": "decode",
+      "batch_size": 1,
+      "q_lengths": [
+        1
+      ],
+      "kv_lengths": [
+        32753
+      ],
+      "num_tokens": 1,
+      "operators": {
+        "gemm": [
+          {
+            "name": "qkv_proj",
+            "type": "ColumnParallelLinear",
+            "M": 1,
+            "N": 7168,
+            "K": 5120,
+            "count": 48
+          },
+          {
+            "name": "o_proj",
+            "type": "RowParallelLinear",
+            "M": 1,
+            "N": 5120,
+            "K": 5120,
+            "count": 48
+          },
+          {
+            "name": "gate_up_proj",
+            "type": "MergedColumnParallelLinear",
+            "M": 1,
+            "N": 27648,
+            "K": 5120,
+            "count": 48
+          },
+          {
+            "name": "down_proj",
+            "type": "RowParallelLinear",
+            "M": 1,
+            "N": 5120,
+            "K": 13824,
+            "count": 48
+          },
+          {
+            "name": "lm_head",
+            "type": "Linear",
+            "M": 1,
+            "N": 152064,
+            "K": 5120,
+            "count": 1
+          }
+        ],
+        "attention": {
+          "attention_type": "fa2_paged",
+          "bs": 1,
+          "q_lengths": [
+            1
+          ],
+          "kv_lengths": [
+            32753
+          ],
+          "nh": 40,
+          "nkv": 8,
+          "hd": 128,
+          "count": 48
+        },
+        "rmsnorm": {
+          "seq": 1,
+          "dim": 5120,
+          "count": 97
+        },
+        "siluandmul": {
+          "seq": 1,
+          "dim": 27648,
+          "count": 48
+        },
+        "communication": []
+      }
+    },
+    {
+      "iteration": 35,
+      "phase": "decode",
+      "batch_size": 1,
+      "q_lengths": [
+        1
+      ],
+      "kv_lengths": [
+        32754
+      ],
+      "num_tokens": 1,
+      "operators": {
+        "gemm": [
+          {
+            "name": "qkv_proj",
+            "type": "ColumnParallelLinear",
+            "M": 1,
+            "N": 7168,
+            "K": 5120,
+            "count": 48
+          },
+          {
+            "name": "o_proj",
+            "type": "RowParallelLinear",
+            "M": 1,
+            "N": 5120,
+            "K": 5120,
+            "count": 48
+          },
+          {
+            "name": "gate_up_proj",
+            "type": "MergedColumnParallelLinear",
+            "M": 1,
+            "N": 27648,
+            "K": 5120,
+            "count": 48
+          },
+          {
+            "name": "down_proj",
+            "type": "RowParallelLinear",
+            "M": 1,
+            "N": 5120,
+            "K": 13824,
+            "count": 48
+          },
+          {
+            "name": "lm_head",
+            "type": "Linear",
+            "M": 1,
+            "N": 152064,
+            "K": 5120,
+            "count": 1
+          }
+        ],
+        "attention": {
+          "attention_type": "fa2_paged",
+          "bs": 1,
+          "q_lengths": [
+            1
+          ],
+          "kv_lengths": [
+            32754
+          ],
+          "nh": 40,
+          "nkv": 8,
+          "hd": 128,
+          "count": 48
+        },
+        "rmsnorm": {
+          "seq": 1,
+          "dim": 5120,
+          "count": 97
+        },
+        "siluandmul": {
+          "seq": 1,
+          "dim": 27648,
+          "count": 48
+        },
+        "communication": []
+      }
+    },
+    {
+      "iteration": 36,
+      "phase": "decode",
+      "batch_size": 1,
+      "q_lengths": [
+        1
+      ],
+      "kv_lengths": [
+        32755
+      ],
+      "num_tokens": 1,
+      "operators": {
+        "gemm": [
+          {
+            "name": "qkv_proj",
+            "type": "ColumnParallelLinear",
+            "M": 1,
+            "N": 7168,
+            "K": 5120,
+            "count": 48
+          },
+          {
+            "name": "o_proj",
+            "type": "RowParallelLinear",
+            "M": 1,
+            "N": 5120,
+            "K": 5120,
+            "count": 48
+          },
+          {
+            "name": "gate_up_proj",
+            "type": "MergedColumnParallelLinear",
+            "M": 1,
+            "N": 27648,
+            "K": 5120,
+            "count": 48
+          },
+          {
+            "name": "down_proj",
+            "type": "RowParallelLinear",
+            "M": 1,
+            "N": 5120,
+            "K": 13824,
+            "count": 48
+          },
+          {
+            "name": "lm_head",
+            "type": "Linear",
+            "M": 1,
+            "N": 152064,
+            "K": 5120,
+            "count": 1
+          }
+        ],
+        "attention": {
+          "attention_type": "fa2_paged",
+          "bs": 1,
+          "q_lengths": [
+            1
+          ],
+          "kv_lengths": [
+            32755
+          ],
+          "nh": 40,
+          "nkv": 8,
+          "hd": 128,
+          "count": 48
+        },
+        "rmsnorm": {
+          "seq": 1,
+          "dim": 5120,
+          "count": 97
+        },
+        "siluandmul": {
+          "seq": 1,
+          "dim": 27648,
+          "count": 48
+        },
+        "communication": []
+      }
+    },
+    {
+      "iteration": 37,
+      "phase": "decode",
+      "batch_size": 1,
+      "q_lengths": [
+        1
+      ],
+      "kv_lengths": [
+        32756
+      ],
+      "num_tokens": 1,
+      "operators": {
+        "gemm": [
+          {
+            "name": "qkv_proj",
+            "type": "ColumnParallelLinear",
+            "M": 1,
+            "N": 7168,
+            "K": 5120,
+            "count": 48
+          },
+          {
+            "name": "o_proj",
+            "type": "RowParallelLinear",
+            "M": 1,
+            "N": 5120,
+            "K": 5120,
+            "count": 48
+          },
+          {
+            "name": "gate_up_proj",
+            "type": "MergedColumnParallelLinear",
+            "M": 1,
+            "N": 27648,
+            "K": 5120,
+            "count": 48
+          },
+          {
+            "name": "down_proj",
+            "type": "RowParallelLinear",
+            "M": 1,
+            "N": 5120,
+            "K": 13824,
+            "count": 48
+          },
+          {
+            "name": "lm_head",
+            "type": "Linear",
+            "M": 1,
+            "N": 152064,
+            "K": 5120,
+            "count": 1
+          }
+        ],
+        "attention": {
+          "attention_type": "fa2_paged",
+          "bs": 1,
+          "q_lengths": [
+            1
+          ],
+          "kv_lengths": [
+            32756
+          ],
+          "nh": 40,
+          "nkv": 8,
+          "hd": 128,
+          "count": 48
+        },
+        "rmsnorm": {
+          "seq": 1,
+          "dim": 5120,
+          "count": 97
+        },
+        "siluandmul": {
+          "seq": 1,
+          "dim": 27648,
+          "count": 48
+        },
+        "communication": []
+      }
+    },
+    {
+      "iteration": 38,
+      "phase": "decode",
+      "batch_size": 1,
+      "q_lengths": [
+        1
+      ],
+      "kv_lengths": [
+        32757
+      ],
+      "num_tokens": 1,
+      "operators": {
+        "gemm": [
+          {
+            "name": "qkv_proj",
+            "type": "ColumnParallelLinear",
+            "M": 1,
+            "N": 7168,
+            "K": 5120,
+            "count": 48
+          },
+          {
+            "name": "o_proj",
+            "type": "RowParallelLinear",
+            "M": 1,
+            "N": 5120,
+            "K": 5120,
+            "count": 48
+          },
+          {
+            "name": "gate_up_proj",
+            "type": "MergedColumnParallelLinear",
+            "M": 1,
+            "N": 27648,
+            "K": 5120,
+            "count": 48
+          },
+          {
+            "name": "down_proj",
+            "type": "RowParallelLinear",
+            "M": 1,
+            "N": 5120,
+            "K": 13824,
+            "count": 48
+          },
+          {
+            "name": "lm_head",
+            "type": "Linear",
+            "M": 1,
+            "N": 152064,
+            "K": 5120,
+            "count": 1
+          }
+        ],
+        "attention": {
+          "attention_type": "fa2_paged",
+          "bs": 1,
+          "q_lengths": [
+            1
+          ],
+          "kv_lengths": [
+            32757
+          ],
+          "nh": 40,
+          "nkv": 8,
+          "hd": 128,
+          "count": 48
+        },
+        "rmsnorm": {
+          "seq": 1,
+          "dim": 5120,
+          "count": 97
+        },
+        "siluandmul": {
+          "seq": 1,
+          "dim": 27648,
+          "count": 48
+        },
+        "communication": []
+      }
+    },
+    {
+      "iteration": 39,
+      "phase": "decode",
+      "batch_size": 1,
+      "q_lengths": [
+        1
+      ],
+      "kv_lengths": [
+        32758
+      ],
+      "num_tokens": 1,
+      "operators": {
+        "gemm": [
+          {
+            "name": "qkv_proj",
+            "type": "ColumnParallelLinear",
+            "M": 1,
+            "N": 7168,
+            "K": 5120,
+            "count": 48
+          },
+          {
+            "name": "o_proj",
+            "type": "RowParallelLinear",
+            "M": 1,
+            "N": 5120,
+            "K": 5120,
+            "count": 48
+          },
+          {
+            "name": "gate_up_proj",
+            "type": "MergedColumnParallelLinear",
+            "M": 1,
+            "N": 27648,
+            "K": 5120,
+            "count": 48
+          },
+          {
+            "name": "down_proj",
+            "type": "RowParallelLinear",
+            "M": 1,
+            "N": 5120,
+            "K": 13824,
+            "count": 48
+          },
+          {
+            "name": "lm_head",
+            "type": "Linear",
+            "M": 1,
+            "N": 152064,
+            "K": 5120,
+            "count": 1
+          }
+        ],
+        "attention": {
+          "attention_type": "fa2_paged",
+          "bs": 1,
+          "q_lengths": [
+            1
+          ],
+          "kv_lengths": [
+            32758
+          ],
+          "nh": 40,
+          "nkv": 8,
+          "hd": 128,
+          "count": 48
+        },
+        "rmsnorm": {
+          "seq": 1,
+          "dim": 5120,
+          "count": 97
+        },
+        "siluandmul": {
+          "seq": 1,
+          "dim": 27648,
+          "count": 48
+        },
+        "communication": []
+      }
+    },
+    {
+      "iteration": 40,
+      "phase": "decode",
+      "batch_size": 1,
+      "q_lengths": [
+        1
+      ],
+      "kv_lengths": [
+        32759
+      ],
+      "num_tokens": 1,
+      "operators": {
+        "gemm": [
+          {
+            "name": "qkv_proj",
+            "type": "ColumnParallelLinear",
+            "M": 1,
+            "N": 7168,
+            "K": 5120,
+            "count": 48
+          },
+          {
+            "name": "o_proj",
+            "type": "RowParallelLinear",
+            "M": 1,
+            "N": 5120,
+            "K": 5120,
+            "count": 48
+          },
+          {
+            "name": "gate_up_proj",
+            "type": "MergedColumnParallelLinear",
+            "M": 1,
+            "N": 27648,
+            "K": 5120,
+            "count": 48
+          },
+          {
+            "name": "down_proj",
+            "type": "RowParallelLinear",
+            "M": 1,
+            "N": 5120,
+            "K": 13824,
+            "count": 48
+          },
+          {
+            "name": "lm_head",
+            "type": "Linear",
+            "M": 1,
+            "N": 152064,
+            "K": 5120,
+            "count": 1
+          }
+        ],
+        "attention": {
+          "attention_type": "fa2_paged",
+          "bs": 1,
+          "q_lengths": [
+            1
+          ],
+          "kv_lengths": [
+            32759
+          ],
+          "nh": 40,
+          "nkv": 8,
+          "hd": 128,
+          "count": 48
+        },
+        "rmsnorm": {
+          "seq": 1,
+          "dim": 5120,
+          "count": 97
+        },
+        "siluandmul": {
+          "seq": 1,
+          "dim": 27648,
+          "count": 48
+        },
+        "communication": []
+      }
+    },
+    {
+      "iteration": 41,
+      "phase": "decode",
+      "batch_size": 1,
+      "q_lengths": [
+        1
+      ],
+      "kv_lengths": [
+        32760
+      ],
+      "num_tokens": 1,
+      "operators": {
+        "gemm": [
+          {
+            "name": "qkv_proj",
+            "type": "ColumnParallelLinear",
+            "M": 1,
+            "N": 7168,
+            "K": 5120,
+            "count": 48
+          },
+          {
+            "name": "o_proj",
+            "type": "RowParallelLinear",
+            "M": 1,
+            "N": 5120,
+            "K": 5120,
+            "count": 48
+          },
+          {
+            "name": "gate_up_proj",
+            "type": "MergedColumnParallelLinear",
+            "M": 1,
+            "N": 27648,
+            "K": 5120,
+            "count": 48
+          },
+          {
+            "name": "down_proj",
+            "type": "RowParallelLinear",
+            "M": 1,
+            "N": 5120,
+            "K": 13824,
+            "count": 48
+          },
+          {
+            "name": "lm_head",
+            "type": "Linear",
+            "M": 1,
+            "N": 152064,
+            "K": 5120,
+            "count": 1
+          }
+        ],
+        "attention": {
+          "attention_type": "fa2_paged",
+          "bs": 1,
+          "q_lengths": [
+            1
+          ],
+          "kv_lengths": [
+            32760
+          ],
+          "nh": 40,
+          "nkv": 8,
+          "hd": 128,
+          "count": 48
+        },
+        "rmsnorm": {
+          "seq": 1,
+          "dim": 5120,
+          "count": 97
+        },
+        "siluandmul": {
+          "seq": 1,
+          "dim": 27648,
+          "count": 48
+        },
+        "communication": []
+      }
+    },
+    {
+      "iteration": 42,
+      "phase": "decode",
+      "batch_size": 1,
+      "q_lengths": [
+        1
+      ],
+      "kv_lengths": [
+        32761
+      ],
+      "num_tokens": 1,
+      "operators": {
+        "gemm": [
+          {
+            "name": "qkv_proj",
+            "type": "ColumnParallelLinear",
+            "M": 1,
+            "N": 7168,
+            "K": 5120,
+            "count": 48
+          },
+          {
+            "name": "o_proj",
+            "type": "RowParallelLinear",
+            "M": 1,
+            "N": 5120,
+            "K": 5120,
+            "count": 48
+          },
+          {
+            "name": "gate_up_proj",
+            "type": "MergedColumnParallelLinear",
+            "M": 1,
+            "N": 27648,
+            "K": 5120,
+            "count": 48
+          },
+          {
+            "name": "down_proj",
+            "type": "RowParallelLinear",
+            "M": 1,
+            "N": 5120,
+            "K": 13824,
+            "count": 48
+          },
+          {
+            "name": "lm_head",
+            "type": "Linear",
+            "M": 1,
+            "N": 152064,
+            "K": 5120,
+            "count": 1
+          }
+        ],
+        "attention": {
+          "attention_type": "fa2_paged",
+          "bs": 1,
+          "q_lengths": [
+            1
+          ],
+          "kv_lengths": [
+            32761
+          ],
+          "nh": 40,
+          "nkv": 8,
+          "hd": 128,
+          "count": 48
+        },
+        "rmsnorm": {
+          "seq": 1,
+          "dim": 5120,
+          "count": 97
+        },
+        "siluandmul": {
+          "seq": 1,
+          "dim": 27648,
+          "count": 48
+        },
+        "communication": []
+      }
+    },
+    {
+      "iteration": 43,
+      "phase": "decode",
+      "batch_size": 1,
+      "q_lengths": [
+        1
+      ],
+      "kv_lengths": [
+        32762
+      ],
+      "num_tokens": 1,
+      "operators": {
+        "gemm": [
+          {
+            "name": "qkv_proj",
+            "type": "ColumnParallelLinear",
+            "M": 1,
+            "N": 7168,
+            "K": 5120,
+            "count": 48
+          },
+          {
+            "name": "o_proj",
+            "type": "RowParallelLinear",
+            "M": 1,
+            "N": 5120,
+            "K": 5120,
+            "count": 48
+          },
+          {
+            "name": "gate_up_proj",
+            "type": "MergedColumnParallelLinear",
+            "M": 1,
+            "N": 27648,
+            "K": 5120,
+            "count": 48
+          },
+          {
+            "name": "down_proj",
+            "type": "RowParallelLinear",
+            "M": 1,
+            "N": 5120,
+            "K": 13824,
+            "count": 48
+          },
+          {
+            "name": "lm_head",
+            "type": "Linear",
+            "M": 1,
+            "N": 152064,
+            "K": 5120,
+            "count": 1
+          }
+        ],
+        "attention": {
+          "attention_type": "fa2_paged",
+          "bs": 1,
+          "q_lengths": [
+            1
+          ],
+          "kv_lengths": [
+            32762
+          ],
+          "nh": 40,
+          "nkv": 8,
+          "hd": 128,
+          "count": 48
+        },
+        "rmsnorm": {
+          "seq": 1,
+          "dim": 5120,
+          "count": 97
+        },
+        "siluandmul": {
+          "seq": 1,
+          "dim": 27648,
+          "count": 48
+        },
+        "communication": []
+      }
+    },
+    {
+      "iteration": 44,
+      "phase": "decode",
+      "batch_size": 1,
+      "q_lengths": [
+        1
+      ],
+      "kv_lengths": [
+        32763
+      ],
+      "num_tokens": 1,
+      "operators": {
+        "gemm": [
+          {
+            "name": "qkv_proj",
+            "type": "ColumnParallelLinear",
+            "M": 1,
+            "N": 7168,
+            "K": 5120,
+            "count": 48
+          },
+          {
+            "name": "o_proj",
+            "type": "RowParallelLinear",
+            "M": 1,
+            "N": 5120,
+            "K": 5120,
+            "count": 48
+          },
+          {
+            "name": "gate_up_proj",
+            "type": "MergedColumnParallelLinear",
+            "M": 1,
+            "N": 27648,
+            "K": 5120,
+            "count": 48
+          },
+          {
+            "name": "down_proj",
+            "type": "RowParallelLinear",
+            "M": 1,
+            "N": 5120,
+            "K": 13824,
+            "count": 48
+          },
+          {
+            "name": "lm_head",
+            "type": "Linear",
+            "M": 1,
+            "N": 152064,
+            "K": 5120,
+            "count": 1
+          }
+        ],
+        "attention": {
+          "attention_type": "fa2_paged",
+          "bs": 1,
+          "q_lengths": [
+            1
+          ],
+          "kv_lengths": [
+            32763
+          ],
+          "nh": 40,
+          "nkv": 8,
+          "hd": 128,
+          "count": 48
+        },
+        "rmsnorm": {
+          "seq": 1,
+          "dim": 5120,
+          "count": 97
+        },
+        "siluandmul": {
+          "seq": 1,
+          "dim": 27648,
+          "count": 48
+        },
+        "communication": []
+      }
+    },
+    {
+      "iteration": 45,
+      "phase": "decode",
+      "batch_size": 1,
+      "q_lengths": [
+        1
+      ],
+      "kv_lengths": [
+        32764
+      ],
+      "num_tokens": 1,
+      "operators": {
+        "gemm": [
+          {
+            "name": "qkv_proj",
+            "type": "ColumnParallelLinear",
+            "M": 1,
+            "N": 7168,
+            "K": 5120,
+            "count": 48
+          },
+          {
+            "name": "o_proj",
+            "type": "RowParallelLinear",
+            "M": 1,
+            "N": 5120,
+            "K": 5120,
+            "count": 48
+          },
+          {
+            "name": "gate_up_proj",
+            "type": "MergedColumnParallelLinear",
+            "M": 1,
+            "N": 27648,
+            "K": 5120,
+            "count": 48
+          },
+          {
+            "name": "down_proj",
+            "type": "RowParallelLinear",
+            "M": 1,
+            "N": 5120,
+            "K": 13824,
+            "count": 48
+          },
+          {
+            "name": "lm_head",
+            "type": "Linear",
+            "M": 1,
+            "N": 152064,
+            "K": 5120,
+            "count": 1
+          }
+        ],
+        "attention": {
+          "attention_type": "fa2_paged",
+          "bs": 1,
+          "q_lengths": [
+            1
+          ],
+          "kv_lengths": [
+            32764
+          ],
+          "nh": 40,
+          "nkv": 8,
+          "hd": 128,
+          "count": 48
+        },
+        "rmsnorm": {
+          "seq": 1,
+          "dim": 5120,
+          "count": 97
+        },
+        "siluandmul": {
+          "seq": 1,
+          "dim": 27648,
+          "count": 48
+        },
+        "communication": []
+      }
+    },
+    {
+      "iteration": 46,
+      "phase": "decode",
+      "batch_size": 1,
+      "q_lengths": [
+        1
+      ],
+      "kv_lengths": [
+        32765
+      ],
+      "num_tokens": 1,
+      "operators": {
+        "gemm": [
+          {
+            "name": "qkv_proj",
+            "type": "ColumnParallelLinear",
+            "M": 1,
+            "N": 7168,
+            "K": 5120,
+            "count": 48
+          },
+          {
+            "name": "o_proj",
+            "type": "RowParallelLinear",
+            "M": 1,
+            "N": 5120,
+            "K": 5120,
+            "count": 48
+          },
+          {
+            "name": "gate_up_proj",
+            "type": "MergedColumnParallelLinear",
+            "M": 1,
+            "N": 27648,
+            "K": 5120,
+            "count": 48
+          },
+          {
+            "name": "down_proj",
+            "type": "RowParallelLinear",
+            "M": 1,
+            "N": 5120,
+            "K": 13824,
+            "count": 48
+          },
+          {
+            "name": "lm_head",
+            "type": "Linear",
+            "M": 1,
+            "N": 152064,
+            "K": 5120,
+            "count": 1
+          }
+        ],
+        "attention": {
+          "attention_type": "fa2_paged",
+          "bs": 1,
+          "q_lengths": [
+            1
+          ],
+          "kv_lengths": [
+            32765
+          ],
+          "nh": 40,
+          "nkv": 8,
+          "hd": 128,
+          "count": 48
+        },
+        "rmsnorm": {
+          "seq": 1,
+          "dim": 5120,
+          "count": 97
+        },
+        "siluandmul": {
+          "seq": 1,
+          "dim": 27648,
+          "count": 48
+        },
+        "communication": []
+      }
+    },
+    {
+      "iteration": 47,
+      "phase": "decode",
+      "batch_size": 1,
+      "q_lengths": [
+        1
+      ],
+      "kv_lengths": [
+        32766
+      ],
+      "num_tokens": 1,
+      "operators": {
+        "gemm": [
+          {
+            "name": "qkv_proj",
+            "type": "ColumnParallelLinear",
+            "M": 1,
+            "N": 7168,
+            "K": 5120,
+            "count": 48
+          },
+          {
+            "name": "o_proj",
+            "type": "RowParallelLinear",
+            "M": 1,
+            "N": 5120,
+            "K": 5120,
+            "count": 48
+          },
+          {
+            "name": "gate_up_proj",
+            "type": "MergedColumnParallelLinear",
+            "M": 1,
+            "N": 27648,
+            "K": 5120,
+            "count": 48
+          },
+          {
+            "name": "down_proj",
+            "type": "RowParallelLinear",
+            "M": 1,
+            "N": 5120,
+            "K": 13824,
+            "count": 48
+          },
+          {
+            "name": "lm_head",
+            "type": "Linear",
+            "M": 1,
+            "N": 152064,
+            "K": 5120,
+            "count": 1
+          }
+        ],
+        "attention": {
+          "attention_type": "fa2_paged",
+          "bs": 1,
+          "q_lengths": [
+            1
+          ],
+          "kv_lengths": [
+            32766
+          ],
+          "nh": 40,
+          "nkv": 8,
+          "hd": 128,
+          "count": 48
+        },
+        "rmsnorm": {
+          "seq": 1,
+          "dim": 5120,
+          "count": 97
+        },
+        "siluandmul": {
+          "seq": 1,
+          "dim": 27648,
+          "count": 48
+        },
+        "communication": []
+      }
+    },
+    {
+      "iteration": 48,
+      "phase": "decode",
+      "batch_size": 1,
+      "q_lengths": [
+        1
+      ],
+      "kv_lengths": [
+        32767
+      ],
+      "num_tokens": 1,
+      "operators": {
+        "gemm": [
+          {
+            "name": "qkv_proj",
+            "type": "ColumnParallelLinear",
+            "M": 1,
+            "N": 7168,
+            "K": 5120,
+            "count": 48
+          },
+          {
+            "name": "o_proj",
+            "type": "RowParallelLinear",
+            "M": 1,
+            "N": 5120,
+            "K": 5120,
+            "count": 48
+          },
+          {
+            "name": "gate_up_proj",
+            "type": "MergedColumnParallelLinear",
+            "M": 1,
+            "N": 27648,
+            "K": 5120,
+            "count": 48
+          },
+          {
+            "name": "down_proj",
+            "type": "RowParallelLinear",
+            "M": 1,
+            "N": 5120,
+            "K": 13824,
+            "count": 48
+          },
+          {
+            "name": "lm_head",
+            "type": "Linear",
+            "M": 1,
+            "N": 152064,
+            "K": 5120,
+            "count": 1
+          }
+        ],
+        "attention": {
+          "attention_type": "fa2_paged",
+          "bs": 1,
+          "q_lengths": [
+            1
+          ],
+          "kv_lengths": [
+            32767
+          ],
+          "nh": 40,
+          "nkv": 8,
+          "hd": 128,
+          "count": 48
+        },
+        "rmsnorm": {
+          "seq": 1,
+          "dim": 5120,
+          "count": 97
+        },
+        "siluandmul": {
+          "seq": 1,
+          "dim": 27648,
+          "count": 48
+        },
+        "communication": []
+      }
+    }
+  ]
+}
