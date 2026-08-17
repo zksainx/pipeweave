@@ -1,0 +1,67 @@
+{
+  "schema_version": "1.0",
+  "suite": "rtx5090_smoke",
+  "requirements": {
+    "vendor": "nvidia",
+    "cuda_major_min": 13,
+    "compute_capability": "12.0"
+  },
+  "cases": [
+    {
+      "name": "gemm_128x128x128_bm64_bn64",
+      "kernel": "matmul",
+      "family": "gemm",
+      "problem": {"m": 128, "n": 128, "k": 128, "dtype": "float16"},
+      "config": {"block_m": 64, "block_n": 64, "block_k": 32, "num_warps": 4, "num_stages": 3},
+      "measurement": {"warmup": 10, "samples": 12, "target_sample_us": 5000, "cuda_graph": true}
+    },
+    {
+      "name": "gemm_256x256x256_bm64_bn128",
+      "kernel": "matmul",
+      "family": "gemm",
+      "problem": {"m": 256, "n": 256, "k": 256, "dtype": "float16"},
+      "config": {"block_m": 64, "block_n": 128, "block_k": 32, "num_warps": 4, "num_stages": 3},
+      "measurement": {"warmup": 10, "samples": 12, "target_sample_us": 5000, "cuda_graph": true}
+    },
+    {
+      "name": "gemm_512x512x512_bm128_bn128",
+      "kernel": "matmul",
+      "family": "gemm",
+      "problem": {"m": 512, "n": 512, "k": 512, "dtype": "float16"},
+      "config": {"block_m": 128, "block_n": 128, "block_k": 32, "num_warps": 8, "num_stages": 4},
+      "measurement": {"warmup": 10, "samples": 12, "target_sample_us": 5000, "cuda_graph": true}
+    },
+    {
+      "name": "gemm_257x769x513_edge",
+      "kernel": "matmul",
+      "family": "gemm",
+      "problem": {"m": 257, "n": 769, "k": 513, "dtype": "float16"},
+      "config": {"block_m": 64, "block_n": 64, "block_k": 32, "num_warps": 4, "num_stages": 3},
+      "measurement": {"warmup": 10, "samples": 12, "target_sample_us": 5000, "cuda_graph": true}
+    },
+    {
+      "name": "attention_n128_d64_bm64_bn32",
+      "kernel": "attention",
+      "family": "flash_attention_like",
+      "problem": {"batch": 1, "heads": 8, "n_ctx": 128, "head_dim": 64, "dtype": "float16", "causal": true},
+      "config": {"block_m": 64, "block_n": 32, "num_warps": 4, "num_stages": 2},
+      "measurement": {"warmup": 10, "samples": 12, "target_sample_us": 5000, "cuda_graph": true}
+    },
+    {
+      "name": "attention_n256_d64_bm64_bn64",
+      "kernel": "attention",
+      "family": "flash_attention_like",
+      "problem": {"batch": 1, "heads": 8, "n_ctx": 256, "head_dim": 64, "dtype": "float16", "causal": true},
+      "config": {"block_m": 64, "block_n": 64, "num_warps": 4, "num_stages": 3},
+      "measurement": {"warmup": 10, "samples": 12, "target_sample_us": 5000, "cuda_graph": true}
+    },
+    {
+      "name": "attention_n512_d64_bm128_bn64",
+      "kernel": "attention",
+      "family": "flash_attention_like",
+      "problem": {"batch": 1, "heads": 8, "n_ctx": 512, "head_dim": 64, "dtype": "float16", "causal": true},
+      "config": {"block_m": 128, "block_n": 64, "num_warps": 8, "num_stages": 3},
+      "measurement": {"warmup": 10, "samples": 12, "target_sample_us": 5000, "cuda_graph": true}
+    }
+  ]
+}
