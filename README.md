@@ -3,7 +3,7 @@
 This repository contains the artifact for the ISCA 2026 paper:
 
 > **PipeWeave: Synergizing Analytical and Learning Models for Unified GPU Performance Prediction**
-> arXiv preprint: https://arxiv.org/abs/2601.14910
+> Published at [ISCA 2026](https://doi.ieeecomputersociety.org/10.1109/ISCA66397.2026.00126)
 
 PipeWeave is a cross-hardware LLM inference latency predictor. It combines roofline-style analytical models with small trained MLPs to predict operator-level and end-to-end latency for transformer workloads on NVIDIA GPUs.
 
@@ -170,13 +170,16 @@ Generates comparison CSVs under `e2e/` with MAPE and other accuracy metrics agai
 If you use this work, please cite:
 
 ```bibtex
-@article{pipeweave2026,
-  title   = {PipeWeave: Synergizing Analytical and Learning Models for Unified GPU Performance Prediction},
-  author  = {Kaixuan Zhang and Yunfan Cui and Shuhao Zhang and Chutong Ding and Shiyou Qian and Luping Wang and Jian Cao and Guangtao Xue and Cheng Huang and Guodong Yang and Liping Zhang},
-  journal = {arXiv preprint},
-  year    = {2026},
-  url     = {https://arxiv.org/abs/2601.14910}
+@inproceedings{zhang2026pipeweave,
+  author    = {Zhang, Kaixuan and Cui, Yunfan and Zhang, Shuhao and Ding, Chutong and Qian, Shiyou and Wang, Luping and Cao, Jian and Xue, Guangtao and Huang, Cheng and Yang, Guodong and Zhang, Liping},
+  title     = {PipeWeave: Synergizing Analytical and Learning Models for Unified GPU Performance Prediction},
+  booktitle = {2026 ACM/IEEE 53rd Annual International Symposium on Computer Architecture (ISCA)},
+  year      = {2026},
+  pages     = {1734--1749},
+  doi       = {10.1109/ISCA66397.2026.00126},
+  url       = {https://doi.ieeecomputersociety.org/10.1109/ISCA66397.2026.00126},
+  publisher = {IEEE Computer Society},
+  address   = {Los Alamitos, CA, USA},
+  month     = jul
 }
 ```
-
-> Note: The full ISCA 2026 citation will be updated upon publication.
