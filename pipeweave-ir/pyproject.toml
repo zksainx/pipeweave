@@ -1,0 +1,44 @@
+[build-system]
+requires = ["setuptools>=69", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "pipeweave-ir"
+version = "0.1.0"
+description = "Compile-only multi-level IR capture and performance analysis for Triton kernels"
+readme = "README.md"
+requires-python = ">=3.10"
+license = {text = "Apache-2.0"}
+authors = [{name = "PipeWeave contributors"}]
+dependencies = []
+
+[project.optional-dependencies]
+nvidia = [
+  "numpy>=1.26",
+  "torch>=2.8",
+  "triton>=3.4",
+]
+dev = [
+  "pytest>=8",
+  "ruff>=0.9",
+]
+
+[project.scripts]
+pipeweave-ir = "pipeweave_ir.cli:main"
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+addopts = "-q"
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B"]
